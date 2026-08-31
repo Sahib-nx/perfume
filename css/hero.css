@@ -761,6 +761,49 @@
   }
 }
 
+/* Narrow-to-Standard Mobile Screens (up to 433px width) - Add 50px padding top */
+@media (max-width: 433px) {
+  .hero-text-col {
+    padding-top: 50px;
+  }
+}
+
+/* Medium-to-Large Mobile Screens (434px to 600px) */
+@media (min-width: 434px) and (max-width: 600px) {
+  .hero-text-col {
+    padding-top: 6px;
+    max-width: 440px;
+  }
+
+  .hero-heading {
+    font-size: clamp(1.45rem, 5.8vw, 1.82rem);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .hero-description {
+    font-size: 0.94rem;
+    line-height: 1.6;
+    max-width: 360px;
+    margin: 0 auto 16px;
+  }
+
+  .hero-cta-btn {
+    width: 190px;
+    height: 44px;
+    font-size: 0.94rem;
+  }
+
+  .hero-visual-col {
+    max-height: 50vh;
+  }
+
+  .hero-bottle-img {
+    transform: scale(1.18) translateY(2px) !important;
+    height: 94%;
+  }
+}
+
 /* Compact Mobile Screens (e.g. iPhone SE / height <= 720px) */
 @media (max-width: 600px) and (max-height: 720px) {
   .navbar {
@@ -772,7 +815,7 @@
   }
 
   .hero-text-col {
-    padding: 4px 8px;
+    padding: 4px 8px 0 !important;
   }
 
   .hero-heading {
@@ -801,32 +844,5 @@
   .hero-bottle-img {
     transform: scale(1.18) translateY(-4px) !important;
     height: 94%;
-  }
-}
-
-/* Medium-to-Large Mobile Screens (400px to 600px) */
-@media (min-width: 390px) and (max-width: 600px) {
-  .hero-text-col {
-    padding-top: 50px !important;
-    max-width: 440px;
-  }
-
-  .hero-heading {
-    font-size: clamp(1.45rem, 5.8vw, 1.82rem);
-    line-height: 1.25;
-    margin-bottom: 12px;
-  }
-
-  .hero-description {
-    font-size: 0.94rem;
-    line-height: 1.6;
-    max-width: 360px;
-    margin: 0 auto 16px;
-  }
-
-  .hero-cta-btn {
-    width: 190px;
-    height: 44px;
-    font-size: 0.94rem;
   }
 }
