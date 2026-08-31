@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Diwan Al Attour - Haute Parfumerie Heritage</title>
+  <meta name="description"
+    content="Discover the 50-year heritage of Diwan Al Attour. Crafting luxury authentic Arabian perfumes with precious natural oud, Taif rose, and master distillation.">
+
+  <!-- Google Fonts: Josefin Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION BAR
+       ========================================================================== -->
+  <header style="background: rgba(243, 236, 226, 0.95); border-bottom: 1.5px solid rgba(192, 151, 102, 0.3); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);">
+    <nav class="navbar" aria-label="Main Navigation" style="padding: 16px 32px;">
+
+      <!-- Hamburger Button (Mobile / Tablet) -->
+      <button class="nav-hamburger-btn" id="nav-hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="Diwan Al Attour Home">
+        <div class="logo-emblem">
+          <svg viewBox="0 0 50 50" width="44" height="44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="goldGradientAbout" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#D9B172" />
+                <stop offset="50%" stop-color="#AC8147" />
+                <stop offset="100%" stop-color="#805722" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M38 12C33 7 24 6 17 11C9 17 8 28 14 36C20 44 32 45 39 39C42 36 44 32 44 28C44 23 40 20 36 20C31 20 28 23 28 27C28 30 30 32 33 32C35 32 36 31 37 30C36 33 33 35 29 35C22 35 17 30 17 23C17 16 23 11 30 11C33 11 36 12 38 14L40 11Z"
+              fill="url(#goldGradientAbout)" />
+            <polygon points="41,8 42.5,12 46,13.5 42.5,15 41,19 39.5,15 36,13.5 39.5,12" fill="#D9B172" />
+          </svg>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-brand-name" style="font-size: 22px;">Diwan Al Attour</span>
+          <span class="logo-tagline">Haute Parfumerie</span>
+        </div>
+      </a>
+
+      <!-- Center: Navigation Links -->
+      <div class="nav-center-group">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About Us</a>
+        <a href="notes.html" class="nav-link">Fragrance Notes</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+      </div>
+
+      <!-- Right: Social Media / Admin -->
+      <div class="nav-social-group">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="nav-social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" class="nav-social-btn" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        </a>
+      </div>
+
+    </nav>
+
+    <!-- Mobile Slide-out Drawer Menu -->
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+    <aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation">
+      <div class="mobile-drawer-header">
+        <div class="mobile-drawer-logo">
+          <span class="drawer-brand-name">Diwan Al Attour</span>
+        </div>
+      </div>
+      <div class="mobile-drawer-links">
+        <a href="index.html" class="mobile-nav-link">Home</a>
+        <a href="about.html" class="mobile-nav-link active">About Us</a>
+        <a href="notes.html" class="mobile-nav-link">Fragrance Notes</a>
+        <a href="contact.html" class="mobile-nav-link">Contact Us</a>
+      </div>
+    </aside>
+  </header>
+
+  <!-- ==========================================================================
+       HERO BANNER
+       ========================================================================== -->
+  <section class="about-hero">
+    <span class="about-hero-tagline">Since 1976 &bull; Haute Parfumerie</span>
+    <h1 class="about-hero-title">The Art of <span class="accent-gold">Arabian Fragrance</span> & Heritage</h1>
+    <p class="about-hero-desc">
+      For over five decades, Diwan Al Attour has perfected the sacred distillation of rare botanical treasures, capturing timeless elegance in every crystal flacon.
+    </p>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 1: OUR BRAND STORY & PHILOSOPHY
+       ========================================================================== -->
+  <section class="about-story-section">
+    <div class="story-grid">
+      <div class="story-visual-wrap">
+        <img src="assets/section5-perfume.jpg" alt="Artisanal Perfume Creation with Jasmine Petals" class="story-main-img" loading="lazy">
+        <div class="story-badge-floating">
+          <span class="story-badge-number">50+</span>
+          <div class="story-badge-text">
+            Years of Artisanal<br>Mastery
+          </div>
+        </div>
+      </div>
+
+      <div class="story-text-content">
+        <span class="section-eyebrow">Our Origins & Vision</span>
+        <h2 class="story-title">From Ancient Dunes to <span class="accent-gold">Modern Alchemy</span></h2>
+        <p class="story-paragraph">
+          Founded in 1976, Diwan Al Attour was born from an unyielding devotion to authentic perfumery. We believe that true luxury lies in patience: the slow maceration of aged agarwood, the dawn harvest of Taif mountain roses, and the nuanced harmony between heritage and contemporary French haute perfumery.
+        </p>
+        <p class="story-paragraph">
+          Every fragrance we compose is more than a scent — it is an emotional sanctuary, a silent language that celebrates your individuality with remarkable sillage and uncompromising longevity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 2: FOUR PILLARS OF EXCELLENCE
+       ========================================================================== -->
+  <section class="pillars-section">
+    <div class="pillars-container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Uncompromising Standards</span>
+        <h2>Our Pillars of <span class="accent-gold">Mastery</span></h2>
+      </div>
+
+      <div class="pillars-grid">
+        <article class="pillar-card">
+          <div class="pillar-icon-wrap">🌿</div>
+          <h3 class="pillar-title">Purity of Origin</h3>
+          <p class="pillar-desc">
+            We exclusively source grade-A natural essences from legendary terroirs: Taif mountain roses, Assam oud, and Grasse jasmine.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon-wrap">⚗️</div>
+          <h3 class="pillar-title">Artisanal Distillation</h3>
+          <p class="pillar-desc">
+            Combining traditional copper pot alembic extraction with state-of-the-art cold filtration to preserve delicate aromatic nuances.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon-wrap">👑</div>
+          <h3 class="pillar-title">Master Blending</h3>
+          <p class="pillar-desc">
+            Each formula undergoes months of patient maturation and olfactory fine-tuning by master noses before bottling.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon-wrap">✨</div>
+          <h3 class="pillar-title">Sustainable Luxury</h3>
+          <p class="pillar-desc">
+            Committed to ethical floral harvests, fair-trade resin sourcing, and recyclable hand-polished crystal flacons.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: 50-YEAR HERITAGE TIMELINE
+       ========================================================================== -->
+  <section class="timeline-section">
+    <div class="section-header-center">
+      <span class="section-eyebrow">Our Milestones</span>
+      <h2>A Journey Through <span class="accent-gold">Time</span></h2>
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="timeline-item">
+        <div class="timeline-node"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">1976</div>
+          <h3 class="timeline-title">The First Atelier</h3>
+          <p class="timeline-desc">
+            Diwan Al Attour opens its doors as an artisanal boutique dedicated to blending custom bespoke bukhoor and pure oud oils for royalty.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-node"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">1994</div>
+          <h3 class="timeline-title">French & Oriental Fusion</h3>
+          <p class="timeline-desc">
+            We partner with Grasse master perfumers to pioneer the modern Oriental-Floral genre, blending velvety French rose with smoky Arabian incense.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-node"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">2012</div>
+          <h3 class="timeline-title">The Imperial Reserve</h3>
+          <p class="timeline-desc">
+            Launching our private reserve collection featuring 25-year aged wild Cambodian agarwood and Taif rose absolute.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-node"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">2026</div>
+          <h3 class="timeline-title">Global Haute Parfumerie</h3>
+          <p class="timeline-desc">
+            Expanding our flagship boutique presence worldwide with sustainable botanical commitments and bespoke fragrance consultations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: ETHICAL SOURCING & BOTANICAL ORIGINS
+       ========================================================================== -->
+  <section class="sourcing-section">
+    <div class="sourcing-container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Global Terroirs</span>
+        <h2>Our Botanical <span class="accent-gold">Origins</span></h2>
+      </div>
+
+      <div class="origins-grid">
+        <article class="origin-card">
+          <img src="assets/products/rose_eclat.jpg" alt="Taif Rose Petals" class="origin-img" loading="lazy">
+          <div class="origin-body">
+            <span class="origin-location">Saudi Arabia</span>
+            <h3 class="origin-name">Taif Ward Rose</h3>
+            <p class="origin-desc">Handpicked at dawn at 2,000 meters altitude for unparalleled dewy sweetness and honeyed radiance.</p>
+          </div>
+        </article>
+
+        <article class="origin-card">
+          <img src="assets/products/amber_oud.jpg" alt="Cambodian Agarwood Oud" class="origin-img" loading="lazy">
+          <div class="origin-body">
+            <span class="origin-location">Cambodia & Assam</span>
+            <h3 class="origin-name">Wild Agarwood (Oud)</h3>
+            <p class="origin-desc">Ethically harvested resinous heartwood offering deep balsamic warmth, smoky nuances, and unmatched sillage.</p>
+          </div>
+        </article>
+
+        <article class="origin-card">
+          <img src="assets/products/jasmine_white.jpg" alt="Night Blooming Jasmine" class="origin-img" loading="lazy">
+          <div class="origin-body">
+            <span class="origin-location">Grasse, France</span>
+            <h3 class="origin-name">Grandiflorum Jasmine</h3>
+            <p class="origin-desc">The crown jewel of floral perfumery, yielding an opulent, velvety aroma of pure sophistication.</p>
+          </div>
+        </article>
+
+        <article class="origin-card">
+          <img src="assets/products/emerald_green.jpg" alt="Calabrian Bergamot" class="origin-img" loading="lazy">
+          <div class="origin-body">
+            <span class="origin-location">Calabria, Italy</span>
+            <h3 class="origin-name">Noble Bergamot</h3>
+            <p class="origin-desc">Sun-drenched citrus providing sparkling, luminous top notes that invigorate the senses with refined vibrancy.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 5: MASTER PERFUMER PHILOSOPHY
+       ========================================================================== -->
+  <section class="perfumer-quote-section">
+    <div class="quote-emblem">
+      <svg viewBox="0 0 50 50" width="50" height="50" fill="none">
+        <path d="M38 12C33 7 24 6 17 11C9 17 8 28 14 36C20 44 32 45 39 39C42 36 44 32 44 28C44 23 40 20 36 20C31 20 28 23 28 27C28 30 30 32 33 32C35 32 36 31 37 30C36 33 33 35 29 35C22 35 17 30 17 23C17 16 23 11 30 11C33 11 36 12 38 14L40 11Z" fill="#C09766" />
+      </svg>
+    </div>
+    <blockquote class="quote-text">
+      "A perfume is a portrait painted without brushes — an invisible memory that lingers long after you have departed."
+    </blockquote>
+    <div class="quote-author">Master Perfumer & Founder</div>
+    <div class="quote-role">Diwan Al Attour Atelier</div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION: FOOTER
+       ========================================================================== -->
+  <footer class="site-footer" id="contact" aria-label="Site Footer">
+    <div class="footer-container">
+
+      <!-- Column 1: Brand Info & Social Channels -->
+      <div class="footer-brand-col">
+        <a href="index.html" class="footer-logo-brand" aria-label="Diwan Al Attour Home">
+          <div class="footer-logo-emblem">
+            <svg viewBox="0 0 50 50" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M38 12C33 7 24 6 17 11C9 17 8 28 14 36C20 44 32 45 39 39C42 36 44 32 44 28C44 23 40 20 36 20C31 20 28 23 28 27C28 30 30 32 33 32C35 32 36 31 37 30C36 33 33 35 29 35C22 35 17 30 17 23C17 16 23 11 30 11C33 11 36 12 38 14L40 11Z"
+                fill="#FFFFFF" />
+              <polygon points="41,8 42.5,12 46,13.5 42.5,15 41,19 39.5,15 36,13.5 39.5,12" fill="#FDF3E5" />
+              <polygon points="45,22 46,24.5 48.5,25.5 46,26.5 45,29 44,26.5 41.5,25.5 44,24.5" fill="#FFFFFF" />
+              <circle cx="21" cy="40" r="1.5" fill="#FFFFFF" />
+              <circle cx="15" cy="38" r="1" fill="#FDF3E5" />
+            </svg>
+          </div>
+          <div class="footer-logo-text-wrap">
+            <span class="footer-brand-name">Diwan Al Attour</span>
+            <span class="footer-brand-arabic">ديوان العطور</span>
+          </div>
+        </a>
+        <p class="footer-desc">
+          Diwan Al Attour is a registered luxury trademark dedicated for over 50 years to the art of crafting natural, long-lasting perfumes with high longevity and pure distinction.
+        </p>
+
+        <div class="footer-social-wrapper">
+          <span class="footer-social-title">Connect With Us</span>
+          <div class="footer-social-icons">
+            <!-- Email -->
+            <a href="mailto:info@diwanalattour.com" class="social-icon-btn" aria-label="Send us an Email">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.586 1.761.854 2.782.854 3.179 0 5.766-2.587 5.766-5.766 0-3.18-2.587-5.766-5.752-5.766zm9.969 5.766c0 5.514-4.486 10-10 10-1.716 0-3.329-.434-4.743-1.196l-5.257 1.378 1.404-5.132c-.859-1.488-1.404-3.21-1.404-5.05 0-5.514 4.486-10 10-10s10 4.486 10 10zm-6.079 3.864c-.179-.089-1.059-.523-1.223-.582-.164-.06-.283-.089-.403.089-.119.179-.462.582-.566.701-.104.12-.209.134-.388.045s-.758-.279-1.444-.891c-.534-.476-.895-1.064-.999-1.243-.105-.18-.011-.277.078-.366.081-.08.179-.209.269-.313.089-.105.119-.179.179-.299.06-.119.03-.224-.015-.313-.045-.09-.403-.97-.552-1.329-.145-.349-.293-.301-.403-.307-.104-.005-.224-.006-.343-.006s-.313.045-.477.224c-.164.179-.627.612-.627 1.493s.642 1.732.731 1.851c.09.119 1.264 1.93 3.062 2.707.428.185.762.295 1.022.378.43.136.821.117 1.13.071.345-.052 1.059-.433 1.208-.851.149-.418.149-.776.104-.851-.044-.075-.164-.119-.343-.209z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="#" class="social-icon-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Navigation & Newsletter -->
+      <div class="footer-links-col">
+        <h3 class="footer-col-title">Navigation</h3>
+        <ul class="footer-nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Our Heritage</a></li>
+          <li><a href="notes.html">Fragrance Notes Guide</a></li>
+          <li><a href="contact.html">Contact & Boutiques</a></li>
+        </ul>
+
+        <div class="footer-newsletter-box">
+          <span class="newsletter-title">Subscribe to Our Newsletter</span>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Diwan Al Attour!');">
+            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="newsletter-submit-btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Column 3: Customer Service -->
+      <div class="footer-service-col">
+        <h3 class="footer-col-title">Customer Concierge</h3>
+        <ul class="footer-nav-list">
+          <li><a href="contact.html">VIP Consultation</a></li>
+          <li><a href="contact.html#boutiques">Boutique Locations</a></li>
+          <li><a href="admin.html" target="_blank" style="color: #C09766; font-weight: 600;">👑 Admin Portal</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="footer-bottom-bar">
+      <span>&copy; 2026 Diwan Al Attour. All rights reserved.</span>
+      <div>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Drawer Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerBtn = document.getElementById('nav-hamburger-btn');
+      const navDrawer = document.getElementById('mobile-nav-drawer');
+      const navBackdrop = document.getElementById('mobile-nav-backdrop');
+
+      function toggleMobileMenu() {
+        const isOpen = navDrawer.classList.toggle('open');
+        navBackdrop.classList.toggle('open', isOpen);
+        hamburgerBtn.classList.toggle('active', isOpen);
+      }
+
+      function closeMobileMenu() {
+        navDrawer.classList.remove('open');
+        navBackdrop.classList.remove('open');
+        hamburgerBtn.classList.remove('active');
+      }
+
+      if (hamburgerBtn && navDrawer && navBackdrop) {
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+        navBackdrop.addEventListener('click', closeMobileMenu);
+      }
+    });
+  </script>
+</body>
+</html>

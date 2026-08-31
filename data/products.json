@@ -1,0 +1,99 @@
+[
+  {
+    "id": "prod-1",
+    "title": "Yasmina",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Women",
+    "description": "A luminous floral composition of night-blooming jasmine and delicate white lilies resting on a warm amber base.",
+    "imageUrl": "assets/products/jasmine_white.jpg",
+    "placement": "featured",
+    "isFeatured": true,
+    "filterCategories": [],
+    "createdAt": "2026-08-30T10:00:00.000Z"
+  },
+  {
+    "id": "prod-2",
+    "title": "Eastern Scent",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Men",
+    "description": "An opulent woody-amber fragrance balancing radiant tropical fruit sweetness with rich balsamic oud and cedarwood.",
+    "imageUrl": "assets/products/amber_orient.jpg",
+    "placement": "featured",
+    "isFeatured": true,
+    "filterCategories": [],
+    "createdAt": "2026-08-30T10:05:00.000Z"
+  },
+  {
+    "id": "prod-3",
+    "title": "Jewel of Caravans",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Women",
+    "description": "A romantic bouquet of velvety pink rose petals infused with sparkling citrus top notes and silky vanilla.",
+    "imageUrl": "assets/products/rose_eclat.jpg",
+    "placement": "featured",
+    "isFeatured": true,
+    "filterCategories": [],
+    "createdAt": "2026-08-30T10:10:00.000Z"
+  },
+  {
+    "id": "prod-4",
+    "title": "Emerald Rose",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Women",
+    "description": "A captivating elixir of fresh exotic orchids, crushed green foliage, and warm sensual base notes.",
+    "imageUrl": "assets/products/emerald_green.jpg",
+    "placement": "featured",
+    "isFeatured": true,
+    "filterCategories": [],
+    "createdAt": "2026-08-30T10:15:00.000Z"
+  },
+  {
+    "id": "prod-5",
+    "title": "Imperial Oud",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Men",
+    "description": "A majestic smoky oud infused with vibrant saffron spices and sun-drenched Damascus roses.",
+    "imageUrl": "assets/products/amber_oud.jpg",
+    "placement": "best-sellers",
+    "isFeatured": false,
+    "filterCategories": [
+      "best-sellers"
+    ],
+    "createdAt": "2026-08-30T10:20:00.000Z"
+  },
+  {
+    "id": "prod-6",
+    "title": "Lavender Mist",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Women",
+    "description": "A soothing whisper of French mountain lavender and cool water mist on an ethereal white musk base.",
+    "imageUrl": "assets/products/lavender_purple.jpg",
+    "placement": "new-arrivals",
+    "isFeatured": false,
+    "filterCategories": [
+      "new-arrivals"
+    ],
+    "createdAt": "2026-08-30T10:25:00.000Z"
+  },
+  {
+    "id": "prod-7",
+    "title": "1001 Nights",
+    "price": 70,
+    "rating": 4.9,
+    "category": "Unisex",
+    "description": "A nocturnal blend of mysterious dark incense, nocturnal jasmine, and golden honeyed amber.",
+    "imageUrl": "assets/products/night_black.jpg",
+    "placement": "top-rated",
+    "isFeatured": false,
+    "filterCategories": [
+      "top-rated"
+    ],
+    "createdAt": "2026-08-30T10:30:00.000Z"
+  }
+]

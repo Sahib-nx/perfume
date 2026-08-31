@@ -1,0 +1,516 @@
+/* ==========================================================================
+   DIWAN AL ATTOUR - ABOUT US LUXURY STYLESHEET
+   ========================================================================== */
+
+:root {
+  --primary-color: #C09766;
+  --primary-light: #F3EBE1;    /* Light background */
+  --primary-dark: #4D3B2B;     /* Dark text color */
+  --secondary-color: #8b6f47;  /* Secondary accent */
+  --tertiary-color: #EADDCE;   /* Subtle accent */
+  --highlight-color: #F5E5CC;  /* Highlight accent */
+  --white-color: #FFFFFF;
+  --gray-color: #6b7280;
+  --danger-color: #b25e31;     /* Error/sale color */
+  --warning-color: #C09766;    /* Rating stars color */
+
+  --font-main: 'Josefin Sans', sans-serif;
+  --transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --radius-asym: 8px 36px 8px 36px;
+  --radius-lg: 24px;
+  --card-shadow: 0 12px 30px rgba(77, 59, 43, 0.08);
+}
+
+/* Base resets & layout */
+body {
+  font-family: var(--font-main);
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   PAGE HERO BANNER
+   ========================================================================== */
+.about-hero {
+  position: relative;
+  width: 100%;
+  min-height: 55vh;
+  background: linear-gradient(180deg, rgba(36, 29, 23, 0.72) 0%, rgba(36, 29, 23, 0.85) 100%),
+              url('../assets/hero-bg.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 24px 70px;
+  color: var(--white-color);
+}
+
+.about-hero-tagline {
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #E5A93C;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-hero-tagline::before,
+.about-hero-tagline::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: #E5A93C;
+}
+
+.about-hero-title {
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+.about-hero-title .accent-gold {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.about-hero-desc {
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  color: #E8DBCF;
+  max-width: 680px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BRAND HERITAGE STORY SECTION
+   ========================================================================== */
+.about-story-section {
+  position: relative;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.story-visual-wrap {
+  position: relative;
+}
+
+.story-main-img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: var(--radius-asym);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 20px 45px rgba(77, 59, 43, 0.18);
+}
+
+.story-badge-floating {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--white-color);
+  border: 1.5px solid var(--primary-color);
+  border-radius: var(--radius-asym);
+  padding: 20px 26px;
+  box-shadow: 0 14px 35px rgba(77, 59, 43, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.story-badge-number {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--secondary-color);
+  line-height: 1;
+}
+
+.story-badge-text {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+
+.story-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+}
+
+.story-title {
+  font-size: clamp(2rem, 2.8vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--primary-dark);
+}
+
+.story-title .accent-gold {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.story-paragraph {
+  font-size: 15.5px;
+  color: #5C4A3A;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
+   FOUR PILLARS OF EXCELLENCE
+   ========================================================================== */
+.pillars-section {
+  background: var(--tertiary-color);
+  padding: 90px 32px;
+  position: relative;
+}
+
+.pillars-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.section-header-center {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header-center h2 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 300;
+  color: var(--primary-dark);
+}
+
+.section-header-center h2 .accent-gold {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+}
+
+.pillar-card {
+  background: var(--white-color);
+  border: 1px solid rgba(192, 151, 102, 0.4);
+  border-radius: var(--radius-asym);
+  padding: 36px 28px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-color);
+  box-shadow: 0 20px 40px rgba(77, 59, 43, 0.16);
+}
+
+.pillar-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--highlight-color);
+  border: 1px solid rgba(192, 151, 102, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--secondary-color);
+}
+
+.pillar-title {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.pillar-desc {
+  font-size: 14px;
+  color: var(--gray-color);
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   HISTORICAL TIMELINE
+   ========================================================================== */
+.timeline-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 90px 32px;
+}
+
+.timeline-wrapper {
+  position: relative;
+  margin-top: 50px;
+}
+
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 24px 40px;
+  box-sizing: border-box;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 32px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: 3px solid var(--white-color);
+  box-shadow: 0 0 0 3px rgba(192, 151, 102, 0.35);
+  z-index: 5;
+}
+
+.timeline-item:nth-child(odd) .timeline-node {
+  right: -9px;
+}
+
+.timeline-item:nth-child(even) .timeline-node {
+  left: -9px;
+}
+
+.timeline-card {
+  background: var(--white-color);
+  border: 1.2px solid rgba(192, 151, 102, 0.35);
+  border-radius: var(--radius-asym);
+  padding: 26px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+.timeline-card:hover {
+  border-color: var(--secondary-color);
+  transform: scale(1.02);
+}
+
+.timeline-year {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 6px;
+}
+
+.timeline-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+
+.timeline-desc {
+  font-size: 13.5px;
+  color: #5C4A3A;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   ETHICAL SOURCING & BOTANICAL ORIGINS
+   ========================================================================== */
+.sourcing-section {
+  background: #EFE4D6;
+  padding: 85px 32px;
+}
+
+.sourcing-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.origins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 24px;
+}
+
+.origin-card {
+  background: var(--white-color);
+  border: 1px solid rgba(192, 151, 102, 0.3);
+  border-radius: var(--radius-asym);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+.origin-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(77, 59, 43, 0.14);
+}
+
+.origin-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.origin-body {
+  padding: 22px 20px;
+}
+
+.origin-location {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  margin-bottom: 6px;
+}
+
+.origin-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+
+.origin-desc {
+  font-size: 13px;
+  color: #5C4A3A;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   MASTER PERFUMER QUOTE
+   ========================================================================== */
+.perfumer-quote-section {
+  max-width: 960px;
+  margin: 70px auto 90px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.quote-emblem {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+}
+
+.quote-text {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--primary-dark);
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.quote-author {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  letter-spacing: 1px;
+}
+
+.quote-role {
+  font-size: 12.5px;
+  color: var(--gray-color);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   RESPONSIVE QUERIES
+   ========================================================================== */
+@media (max-width: 992px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .story-main-img {
+    height: 380px;
+  }
+  .story-badge-floating {
+    bottom: -15px;
+    right: 15px;
+  }
+  .timeline-wrapper::before {
+    left: 24px;
+  }
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    text-align: left !important;
+    padding-left: 60px;
+    padding-right: 15px;
+  }
+  .timeline-node {
+    left: 15px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-hero {
+    padding: 100px 16px 50px;
+    min-height: 45vh;
+  }
+  .about-story-section {
+    padding: 50px 16px;
+  }
+  .pillars-section {
+    padding: 60px 16px;
+  }
+  .sourcing-section {
+    padding: 60px 16px;
+  }
+  .story-badge-floating {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    margin-top: 16px;
+  }
+}

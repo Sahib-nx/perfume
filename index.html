@@ -72,10 +72,10 @@
 
       <!-- Center: Navigation Links (Strictly Centered) -->
       <div class="nav-center-group">
-        <a href="#hero" class="nav-link active" id="nav-link-home">Home</a>
-        <a href="#about" class="nav-link" id="nav-link-about">About Us</a>
-        <a href="#products" class="nav-link" id="nav-link-perfumes">Perfumes</a>
-        <a href="#contact" class="nav-link" id="nav-link-contact">Contact Us</a>
+        <a href="index.html" class="nav-link active" id="nav-link-home">Home</a>
+        <a href="about.html" class="nav-link" id="nav-link-about">About Us</a>
+        <a href="notes.html" class="nav-link" id="nav-link-notes">Fragrance Notes</a>
+        <a href="contact.html" class="nav-link" id="nav-link-contact">Contact Us</a>
       </div>
 
       <!-- Right: Social Media Icons in Light Brown -->
@@ -135,10 +135,10 @@
         </div>
       </div>
       <div class="mobile-drawer-links">
-        <a href="#hero" class="mobile-nav-link active">Home</a>
-        <a href="#about" class="mobile-nav-link">About Us</a>
-        <a href="#products" class="mobile-nav-link">Perfumes</a>
-        <a href="#contact" class="mobile-nav-link">Contact Us</a>
+        <a href="index.html" class="mobile-nav-link active">Home</a>
+        <a href="about.html" class="mobile-nav-link">About Us</a>
+        <a href="notes.html" class="mobile-nav-link">Fragrance Notes</a>
+        <a href="contact.html" class="mobile-nav-link">Contact Us</a>
       </div>
       <div class="mobile-drawer-socials">
         <span class="drawer-socials-label">Connect With Us</span>
@@ -228,8 +228,8 @@
         </svg>
       </button>
 
-      <!-- Featured 3-Card Grid -->
-      <div class="featured-cards-grid">
+      <!-- Featured Cards Grid (Populated dynamically) -->
+      <div class="featured-cards-grid" id="featured-cards-grid">
 
         <!-- Top Card 1: Yasmina Bouquet -->
         <article class="product-card" data-category="women best-sellers">
@@ -845,13 +845,14 @@
         </div>
       </div>
 
-      <!-- Column 2: Important Links & Newsletter -->
+      <!-- Column 2: Navigation & Newsletter -->
       <div class="footer-links-col">
-        <h3 class="footer-col-title">Important Links</h3>
+        <h3 class="footer-col-title">Navigation</h3>
         <ul class="footer-nav-list">
-          <li><a href="#privacy">Privacy Policy</a></li>
-          <li><a href="#returns">Return & Exchange Policy</a></li>
-          <li><a href="#tips">Fragrance Care & Tips</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Our Heritage</a></li>
+          <li><a href="notes.html">Fragrance Notes Guide</a></li>
+          <li><a href="contact.html">Contact & Boutiques</a></li>
         </ul>
 
         <div class="footer-newsletter-box">
@@ -865,12 +866,11 @@
 
       <!-- Column 3: Customer Service -->
       <div class="footer-service-col">
-        <h3 class="footer-col-title">Customer Service</h3>
+        <h3 class="footer-col-title">Customer Concierge</h3>
         <ul class="footer-nav-list">
-          <li><a href="#support">Help & Support</a></li>
-          <li><a href="#account">My Account & Orders</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#stores">Our Boutique Locations</a></li>
+          <li><a href="contact.html">VIP Consultation</a></li>
+          <li><a href="contact.html#boutiques">Boutique Locations</a></li>
+          <li><a href="admin.html" target="_blank" style="color: #C09766; font-weight: 600;">👑 Admin Portal</a></li>
         </ul>
       </div>
 
@@ -987,6 +987,9 @@
       }
     });
   </script>
+
+  <!-- Dynamic Products Integration (API / Storefront Sync) -->
+  <script src="js/products-loader.js"></script>
 </body>
 
 </html>

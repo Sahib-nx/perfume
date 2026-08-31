@@ -102,12 +102,29 @@
 }
 
 .featured-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   gap: 24px;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+  padding: 10px 4px 18px;
+  scrollbar-width: none;
+}
+
+.featured-cards-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop: exactly 3 cards fit per visible carousel frame, extra cards scroll horizontally */
+.featured-cards-grid .product-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: calc((100% - 48px) / 3);
+  max-width: calc((100% - 48px) / 3);
+  scroll-snap-align: start;
 }
 
 /* Side Carousel Arrow Buttons */
