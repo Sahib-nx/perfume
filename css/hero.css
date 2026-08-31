@@ -766,6 +766,10 @@
   .hero-text-col {
     padding-top: 90px;
   }
+
+  .hero-bottle-img {
+    transform: scale(1.62) translateY(-10px) !important;
+  }
 }
 
 /* Medium-to-Large Mobile Screens (434px to 600px) */
