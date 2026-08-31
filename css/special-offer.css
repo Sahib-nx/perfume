@@ -1,0 +1,175 @@
+/* ==========================================================================
+   SECTION 4: SPECIAL OFFER / PROMOTIONAL BANNER
+   ========================================================================== */
+
+.special-offer-section {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2.8 / 1;
+  min-height: 440px;
+  background-image: url('../assets/special-offer-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 30px 60px;
+  overflow: hidden;
+}
+
+.special-offer-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+/* Glassmorphic Promo Card on the Left (border-radius: 32px 0 32px 0) */
+.promo-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-radius: 32px 0 32px 0;
+  padding: 36px 32px;
+  box-shadow: 0 20px 48px rgba(80, 55, 25, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.promo-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 24px 54px rgba(80, 55, 25, 0.22);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+.promo-title {
+  font-family: var(--font-main);
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #382A1E;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.promo-title .accent-gold {
+  color: var(--color-gold-accent);
+  font-weight: 600;
+}
+
+.promo-highlight {
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 500;
+  color: #8C6E4E;
+  letter-spacing: 0.3px;
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.promo-description {
+  font-family: var(--font-main);
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #55473B;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  margin-bottom: 24px;
+  max-width: 360px;
+}
+
+/* Caramel Rounded Button matching FourthSectionRef.png */
+.promo-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 32px;
+  background-color: var(--color-btn-bg);
+  color: var(--color-btn-text);
+  font-family: var(--font-main);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(158, 122, 78, 0.28);
+  transition: var(--transition-smooth);
+}
+
+.promo-cta-btn:hover {
+  background-color: var(--color-btn-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(158, 122, 78, 0.38);
+}
+
+.promo-cta-btn:hover {
+  background-color: var(--color-btn-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(158, 122, 78, 0.38);
+}
+
+/* Responsive Media Queries for Section 4 */
+@media (max-width: 992px) {
+  .special-offer-section {
+    aspect-ratio: unset;
+    min-height: 380px;
+    padding: 50px 30px;
+    background-position: center;
+  }
+  .special-offer-container {
+    justify-content: center;
+  }
+  .promo-card {
+    max-width: 460px;
+    padding: 36px 28px;
+  }
+  .promo-title {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 600px) {
+  .special-offer-section {
+    aspect-ratio: unset;
+    min-height: 420px;
+    padding: 40px 18px;
+    align-items: center;
+  }
+  .special-offer-container {
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+  }
+  .promo-card {
+    padding: 30px 22px;
+    border-radius: 26px 0 26px 0;
+    width: 100%;
+    max-width: 360px;
+  }
+  .promo-title {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .promo-highlight {
+    font-size: 14.5px;
+  }
+  .promo-description {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .promo-cta-btn {
+    padding: 10px 28px;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,74 @@
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS & RESET STYLES
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --color-bg-base: #F3ECE2;
+  --color-gold-accent: #B88944;
+  --color-gold-light: #D4A76A;
+  --color-gold-dark: #8F6631;
+
+  /* Button & Tag Palette */
+  --color-btn-bg: #9E7A4E;
+  --color-btn-hover: #8A6538;
+  --color-btn-text: #F2E7DC;
+
+  /* Text Colors */
+  --color-text-dark: #241D17;
+  --color-text-muted: #665A4F;
+  --color-text-subtle: #8A7D70;
+  --color-nav-link: #382D23;
+
+  /* Icon & Card Tones */
+  --color-icon-light-brown: #A0794C;
+  --color-icon-border: rgba(160, 121, 76, 0.4);
+  --color-icon-bg: rgba(255, 255, 255, 0.35);
+  
+  --color-card-bg: rgba(255, 255, 255, 0.55);
+  --color-card-border: rgba(214, 196, 177, 0.4);
+  --color-card-shadow: 0 10px 24px rgba(70, 50, 30, 0.07);
+  --color-card-hover-shadow: 0 18px 36px rgba(70, 50, 30, 0.14);
+
+  /* Typography */
+  --font-main: 'Josefin Sans', sans-serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  font-family: var(--font-main);
+  color: var(--color-text-dark);
+  background-color: var(--color-bg-base);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

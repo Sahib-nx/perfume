@@ -1,0 +1,296 @@
+/* ==========================================================================
+   SECTION 5: OUR STORY & NATURAL INGREDIENTS
+   ========================================================================== */
+
+.story-section {
+  position: relative;
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 85px 48px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Floating Background Elements */
+.floating-pearl {
+  position: absolute;
+  top: 75px;
+  right: 12%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 32%, #FFF3DF 0%, #D8B478 50%, #7D5728 100%);
+  box-shadow: 0 6px 14px rgba(120, 85, 40, 0.3);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.floating-blossom {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 4px 10px rgba(160, 130, 90, 0.15));
+  opacity: 0.85;
+}
+
+.blossom-left {
+  top: 52%;
+  left: 6%;
+  width: 46px;
+  transform: rotate(-15deg);
+}
+
+.blossom-right {
+  top: 54%;
+  right: 6%;
+  width: 48px;
+  transform: rotate(25deg);
+}
+
+.blossom-bottom {
+  bottom: 24px;
+  left: 44%;
+  width: 38px;
+  transform: rotate(10deg);
+  opacity: 0.75;
+}
+
+.title-blossom {
+  display: inline-block;
+  width: 28px;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 8px;
+  filter: drop-shadow(0 2px 6px rgba(160, 130, 90, 0.2));
+}
+
+/* Header & Story Text */
+.story-header {
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto 55px;
+  position: relative;
+  z-index: 5;
+}
+
+.story-title {
+  font-family: var(--font-main);
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 400;
+  color: var(--color-text-dark);
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.story-title .accent-gold {
+  color: var(--color-gold-accent);
+  font-weight: 500;
+}
+
+.story-paragraph {
+  font-family: var(--font-main);
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: #55473B;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* 2-Column Content Layout: Ingredients Box (Left) + Perfume Showcase Box (Right) */
+.story-content-grid {
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  gap: 32px;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  align-items: end;
+  position: relative;
+  z-index: 5;
+}
+
+/* Left Column: Natural Ingredients */
+.ingredients-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ingredients-subtitle {
+  font-family: var(--font-main);
+  font-size: 20px;
+  font-weight: 600;
+  color: #382A1E;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.ingredients-subtitle .accent-gold {
+  color: var(--color-gold-accent);
+}
+
+/* Ingredients Box: border-radius: 50px 0 32px 0 */
+.ingredients-card {
+  background: #F3EBE2;
+  border: 1px solid rgba(215, 198, 180, 0.65);
+  border-radius: 50px 0 32px 0;
+  padding: 34px 28px;
+  box-shadow: 0 14px 32px rgba(90, 65, 35, 0.1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px 20px;
+  transition: var(--transition-smooth);
+}
+
+.ingredients-card:hover {
+  box-shadow: 0 18px 40px rgba(90, 65, 35, 0.14);
+  border-color: rgba(184, 137, 68, 0.5);
+}
+
+.ingredient-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ingredient-name {
+  font-family: var(--font-main);
+  font-size: 17px;
+  font-weight: 600;
+  color: #9E7A4E;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+.ingredient-desc {
+  font-family: var(--font-main);
+  font-size: 13px;
+  line-height: 1.65;
+  color: #55473B;
+  font-weight: 400;
+  max-width: 210px;
+}
+
+/* Right Column: Perfume Showcase Box */
+/* Shape: border-radius: 0 50px 0 32px; Border: 5px solid #8b6f47 */
+.perfume-showcase-box {
+  width: 320px;
+  border-radius: 0 50px 0 32px;
+  border: 4px solid #C09766;
+  overflow: hidden;
+  box-shadow: 0 18px 42px rgba(110, 80, 45, 0.18);
+  background: #EFE7DE;
+  display: flex;
+  margin-top: 0;
+  transition: var(--transition-smooth);
+}
+
+.perfume-showcase-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px rgba(110, 80, 45, 0.24);
+}
+
+.perfume-showcase-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive Styles for Section 5 */
+@media (max-width: 992px) {
+  .story-section {
+    padding: 65px 24px 85px;
+  }
+
+  .story-content-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 540px;
+    gap: 36px;
+  }
+
+  .perfume-showcase-box {
+    order: 1;
+    margin: 0 auto;
+    width: 290px;
+  }
+
+  .perfume-showcase-img {
+    height: 330px;
+  }
+
+  .ingredients-column {
+    order: 2;
+    width: 100%;
+    align-items: center;
+  }
+
+  .ingredients-card {
+    width: 100%;
+    padding: 32px 24px;
+    gap: 22px 18px;
+  }
+
+  .floating-pearl,
+  .blossom-left,
+  .blossom-right {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .story-section {
+    padding: 50px 14px 65px;
+  }
+
+  .story-header {
+    margin-bottom: 30px;
+  }
+
+  .story-title {
+    font-size: 1.75rem;
+  }
+
+  .story-paragraph {
+    font-size: 13.5px;
+    line-height: 1.7;
+    max-width: 95%;
+  }
+
+  .perfume-showcase-box {
+    width: 250px;
+    border-radius: 0 42px 0 26px;
+    border-width: 3.5px;
+  }
+
+  .perfume-showcase-img {
+    height: 290px;
+  }
+
+  .ingredients-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 12px;
+    padding: 24px 16px;
+    border-radius: 36px 0 24px 0;
+  }
+
+  .ingredient-name {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .ingredient-desc {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+}

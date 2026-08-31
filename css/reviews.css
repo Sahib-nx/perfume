@@ -1,0 +1,223 @@
+/* ==========================================================================
+   SECTION 6: CUSTOMER REVIEWS (CONTINUOUS INFINITE MARQUEE)
+   ========================================================================== */
+
+.reviews-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-bg-base);
+  padding: 85px 0 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Section Header */
+.reviews-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.reviews-title {
+  font-family: var(--font-main);
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 400;
+  color: var(--color-text-dark);
+  letter-spacing: 1.2px;
+}
+
+.reviews-title .accent-gold {
+  color: var(--color-gold-accent);
+  font-weight: 500;
+}
+
+/* Marquee Carousel Outer Container */
+.reviews-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Moving Track */
+.reviews-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: reviewsMarquee 38s linear infinite;
+}
+
+.reviews-marquee-container:hover .reviews-track {
+  animation-play-state: paused;
+}
+
+@keyframes reviewsMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Review Card: border-radius: 0 32px 0 32px */
+.review-card {
+  flex: 0 0 540px;
+  background: #FFFFFF;
+  border-radius: 0 32px 0 32px;
+  border: 1px solid rgba(215, 198, 180, 0.55);
+  box-shadow: 0 12px 32px rgba(90, 65, 35, 0.08);
+  padding: 34px 38px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(90, 65, 35, 0.14);
+  border-color: rgba(184, 137, 68, 0.5);
+}
+
+/* Review Author Column (First Letter Badge) */
+.review-author-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 110px;
+}
+
+.author-letter-badge {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E6CA9E 0%, #A0794C 100%);
+  color: #FFFFFF;
+  font-family: var(--font-main);
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(160, 120, 75, 0.28);
+  margin-bottom: 10px;
+}
+
+.author-name {
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 600;
+  color: #382A1E;
+  margin-bottom: 3px;
+}
+
+.author-role {
+  font-family: var(--font-main);
+  font-size: 12.5px;
+  color: #8C7866;
+  font-weight: 400;
+}
+
+/* Review Content Column */
+.review-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.review-headline {
+  font-family: var(--font-main);
+  font-size: 19px;
+  font-weight: 600;
+  color: #9E7A4E;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+
+.review-quote {
+  font-family: var(--font-main);
+  font-size: 14px;
+  line-height: 1.7;
+  color: #55473B;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.review-stars {
+  display: flex;
+  gap: 3px;
+  color: #E2B04A;
+  font-size: 16px;
+}
+
+/* Responsive Styles for Reviews */
+@media (max-width: 992px) {
+  .review-card {
+    flex: 0 0 460px;
+    padding: 28px 26px;
+    gap: 20px;
+  }
+  .author-letter-badge {
+    width: 58px;
+    height: 58px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-section {
+    padding: 55px 0 70px;
+  }
+  .reviews-title {
+    font-size: clamp(1.8rem, 6.5vw, 2.4rem);
+  }
+  .reviews-header {
+    margin-bottom: 36px;
+  }
+  .review-card {
+    flex: 0 0 295px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 18px;
+    gap: 14px;
+    border-radius: 0 28px 0 28px;
+  }
+  .review-author-box {
+    min-width: unset;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    text-align: left;
+  }
+  .author-letter-badge {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-size: 15px;
+  }
+  .author-role {
+    font-size: 12px;
+  }
+  .review-headline {
+    font-size: 17px;
+  }
+  .review-quote {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+}
