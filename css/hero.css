@@ -672,34 +672,13 @@
     order: 1;
     flex: 0 0 auto;
     width: 100%;
-    max-width: 380px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 68px 24px 0;
     margin: 0;
     z-index: 10;
-  }
-
-  .hero-heading {
-    font-size: clamp(1.25rem, 5vw, 1.55rem);
-    line-height: 1.25;
-    padding: 0 2px;
-    word-break: normal;
-    overflow-wrap: normal;
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .hero-description {
-    font-size: 0.8rem;
-    line-height: 1.52;
-    padding: 0 4px;
-    max-width: 300px;
-    margin: 0 auto 12px;
-    text-align: center;
   }
 
   .hero-btn-wrapper {
@@ -707,19 +686,6 @@
     justify-content: center;
     width: 100%;
     margin: 0 auto;
-  }
-
-  .hero-cta-btn {
-    width: 170px;
-    height: 38px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background-color: var(--color-btn-bg);
   }
 
   .hero-cta-btn .btn-arrow svg {
@@ -730,8 +696,6 @@
   .hero-visual-col {
     order: 2;
     flex: 1 1 auto;
-    min-height: 320px;
-    max-height: 56vh;
     width: 100%;
     display: flex;
     align-items: flex-end;
@@ -748,28 +712,113 @@
     align-items: flex-end;
     justify-content: center;
   }
+}
+
+/* ===== MOBILE MEDIA QUERIES - Ordered by Specificity (Most Specific First) ===== */
+
+/* Compact Mobile Screens with Narrow Width (e.g. iPhone SE / ≤434px width AND ≤720px height) */
+@media (max-width: 434px) and (max-height: 720px) {
+  .navbar {
+    padding: 8px 16px 2px;
+  }
+
+  .logo-brand-name {
+    font-size: 16.5px;
+  }
+
+  .hero-text-col {
+    padding-top: 52px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 390px;
+  }
+
+  .hero-heading {
+    font-size: 1.40rem;
+    line-height: 1.22;
+    margin-bottom: 6px;
+  }
+
+  .hero-description {
+    font-size: 0.76rem;
+    line-height: 1.45;
+    max-width: 290px;
+    margin: 0 auto 10px;
+  }
+
+  .hero-cta-btn {
+    width: 160px;
+    height: 36px;
+    font-size: 0.82rem;
+  }
+
+  .hero-visual-col {
+    padding-bottom: 16px;
+    min-height: 250px;
+  }
 
   .hero-bottle-img {
-    transform: scale(1.42) translateY(-16px);
-    max-height: 100%;
-    height: 98%;
-    width: auto;
-    max-width: 96%;
-    object-fit: contain;
-    object-position: center bottom;
-    filter: drop-shadow(0 20px 36px rgba(50, 35, 20, 0.24));
+    transform: scale(1.25) translateY(-12px);
+    height: 94%;
   }
 }
 
-/* Narrow-to-Standard Mobile Screens (360px to 434px width) */
-@media (max-width: 434px) {
+/* Compact Mobile Screens with Medium Width (434px to 600px AND ≤720px height) */
+@media (min-width: 434px) and (max-width: 600px) and (max-height: 720px) {
+  .navbar {
+    padding: 8px 16px 2px;
+  }
+
+  .logo-brand-name {
+    font-size: 16.5px;
+  }
+
+  .hero-text-col {
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 440px;
+  }
+
+  .hero-heading {
+    font-size: 1.3rem;
+    line-height: 1.22;
+    margin-bottom: 8px;
+  }
+
+  .hero-description {
+    font-size: 0.82rem;
+    line-height: 1.48;
+    max-width: 330px;
+    margin: 0 auto 12px;
+  }
+
+  .hero-cta-btn {
+    width: 170px;
+    height: 38px;
+    font-size: 0.84rem;
+  }
+
+  .hero-visual-col {
+    max-height: 42vh;
+    min-height: 270px;
+  }
+
+  .hero-bottle-img {
+    transform: scale(1.45) translateY(-8px);
+    height: 92%;
+  }
+}
+
+/* Narrow Mobile Screens (360px to 434px width, Normal Height) */
+@media (max-width: 434px) and (min-height: 721px) {
   .hero-text-col {
     padding-top: 58px;
     max-width: 390px;
   }
 
   .hero-heading {
-    font-size: clamp(1.42rem, 5.4vw, 1.72rem);
+    font-size: clamp(1.58rem, 6.2vw, 1.95rem);
     line-height: 1.24;
     margin-bottom: 10px;
   }
@@ -791,8 +840,8 @@
   }
 }
 
-/* Medium-to-Large Mobile Screens (434px to 600px) */
-@media (min-width: 434px) and (max-width: 600px) {
+/* Medium-to-Large Mobile Screens (434px to 600px, Normal Height) */
+@media (min-width: 434px) and (max-width: 600px) and (min-height: 721px) {
   .hero-text-col {
     padding-top: 48px;
     max-width: 440px;
@@ -823,52 +872,37 @@
   }
 
   .hero-bottle-img {
-    transform: scale(1.10) translateY(14px);
+    transform: scale(1.65) translateY(-2px);
     height: 90%;
   }
 }
 
-/* Compact Mobile Screens (e.g. iPhone SE / height <= 720px) */
-@media (max-width: 600px) and (max-height: 720px) {
-  .navbar {
-    padding: 8px 16px 2px;
-  }
-
-  .logo-brand-name {
-    font-size: 16.5px;
-  }
-
+/* General Mobile Screens (up to 600px, Default Fallback) */
+@media (max-width: 600px) {
   .hero-text-col {
-    padding-top: 52px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 58px;
+    max-width: 380px;
   }
 
   .hero-heading {
-    font-size: 1.25rem;
-    line-height: 1.22;
-    margin-bottom: 6px;
+    font-size: clamp(1.25rem, 5vw, 1.55rem);
+    line-height: 1.25;
+    margin-bottom: 8px;
   }
 
   .hero-description {
-    font-size: 0.76rem;
-    line-height: 1.45;
-    max-width: 290px;
-    margin: 0 auto 10px;
-  }
-
-  .hero-cta-btn {
-    width: 160px;
-    height: 36px;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
+    line-height: 1.52;
+    max-width: 300px;
+    margin: 0 auto 12px;
   }
 
   .hero-visual-col {
-    min-height: 250px;
+    padding-bottom: 16px;
   }
 
   .hero-bottle-img {
-    transform: scale(1.18) translateY(-4px);
-    height: 94%;
+    transform: scale(1.42) translateY(-16px);
+    height: 98%;
   }
 }
