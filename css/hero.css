@@ -678,7 +678,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 68px 24px 0;
+    padding: 90px 28px 0;
     margin: 0;
     z-index: 10;
   }
@@ -764,14 +764,14 @@
 /* Narrow-to-Standard Mobile Screens (up to 433px width) */
 @media (max-width: 433px) {
   .hero-text-col {
-    padding-top: 68px;
+    padding-top: 90px;
   }
 }
 
 /* Medium-to-Large Mobile Screens (434px to 600px) */
 @media (min-width: 434px) and (max-width: 600px) {
   .hero-text-col {
-    padding-top: 68px;
+    padding-top: 90px;
     max-width: 440px;
   }
 
@@ -815,9 +815,9 @@
   }
 
   .hero-text-col {
-    padding-top: 52px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 72px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .hero-heading {
