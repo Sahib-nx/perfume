@@ -764,7 +764,7 @@
 /* Narrow-to-Standard Mobile Screens (up to 433px width) */
 @media (max-width: 433px) {
   .hero-text-col {
-    padding-top: 90px;
+    padding-top: 68px;
   }
 
   .hero-bottle-img {
@@ -775,7 +775,7 @@
 /* Medium-to-Large Mobile Screens (434px to 600px) */
 @media (min-width: 434px) and (max-width: 600px) {
   .hero-text-col {
-    padding-top: 90px;
+    padding-top: 68px;
     max-width: 440px;
   }
 
@@ -819,9 +819,9 @@
   }
 
   .hero-text-col {
-    padding-top: 72px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-top: 52px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .hero-heading {
