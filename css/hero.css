@@ -678,7 +678,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 90px 28px 0;
+    padding: 68px 24px 0;
     margin: 0;
     z-index: 10;
   }
@@ -750,7 +750,7 @@
   }
 
   .hero-bottle-img {
-    transform: scale(1.42) translateY(-16px) !important;
+    transform: scale(1.42) translateY(-16px);
     max-height: 100%;
     height: 98%;
     width: auto;
