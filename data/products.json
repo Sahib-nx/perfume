@@ -7,9 +7,11 @@
     "category": "Women",
     "description": "A luminous floral composition of night-blooming jasmine and delicate white lilies resting on a warm amber base.",
     "imageUrl": "assets/products/jasmine_white.jpg",
-    "placement": "featured",
-    "isFeatured": true,
-    "filterCategories": [],
+    "placement": "top-rated",
+    "isFeatured": false,
+    "filterCategories": [
+      "top-rated"
+    ],
     "createdAt": "2026-08-30T10:00:00.000Z"
   },
   {

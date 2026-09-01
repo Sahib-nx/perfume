@@ -4,6 +4,15 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Automatic backend API resolver (seamlessly connects to port 5000 if opened from Live Server port 5500)
+  function getApiBase() {
+    if (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '5000')) {
+      return 'http://localhost:5000';
+    }
+    return '';
+  }
+  const API_BASE = getApiBase();
+
   // State variables
   let allProducts = [];
   let currentFilter = 'all';
@@ -93,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const res = await fetch('/api/auth/check', {
+      const res = await fetch(`${API_BASE}/api/auth/check`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -136,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     authError.textContent = '';
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
@@ -153,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Authentication failed', 'error');
       }
     } catch (err) {
-      authError.textContent = 'Server error. Please ensure the backend server is running.';
+      authError.textContent = 'Server error. Please ensure the backend server (node server.js) is running on port 5000.';
       showToast('Connection error', 'error');
     }
   });
@@ -173,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchProducts() {
     try {
       const token = getAuthToken();
-      const res = await fetch('/api/products', {
+      const res = await fetch(`${API_BASE}/api/products`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -314,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const token = getAuthToken();
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`${API_BASE}/api/products/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -467,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Uploading image to Cloudinary...', 'info');
 
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch(`${API_BASE}/api/upload`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
@@ -516,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const token = getAuthToken();
     const isEdit = Boolean(id);
-    const url = isEdit ? `/api/products/${id}` : '/api/products';
+    const url = isEdit ? `${API_BASE}/api/products/${id}` : `${API_BASE}/api/products`;
     const method = isEdit ? 'PUT' : 'POST';
 
     try {
@@ -573,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       btnConfirmDelete.textContent = 'Deleting...';
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`${API_BASE}/api/products/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

@@ -167,8 +167,10 @@ function renderBottomProducts(products, filter = 'best-sellers') {
   const bottomContainer = document.getElementById('bottom-products-container');
   if (!bottomContainer) return;
 
-  // Bottom section contains collection products (non-featured)
-  let collectionProducts = products.filter(p => !p.isFeatured && p.placement !== 'featured');
+  // If 'all' is selected, display all products; otherwise non-featured collection products
+  let collectionProducts = (filter === 'all')
+    ? products
+    : products.filter(p => !p.isFeatured && p.placement !== 'featured');
 
   // If no separate collection products exist, allow matching from all products
   if (collectionProducts.length === 0) {
@@ -181,9 +183,9 @@ function renderBottomProducts(products, filter = 'best-sellers') {
     return p.filterCategories && Array.isArray(p.filterCategories) && p.filterCategories.includes(filter);
   });
 
-  // If none match the specific filter, fallback to first 4 collection products
+  // If none match the specific filter, fallback to collection products
   if (filtered.length === 0) {
-    filtered = collectionProducts.slice(0, 4);
+    filtered = collectionProducts;
   }
 
   bottomContainer.innerHTML = filtered.map(createProductCardHTML).join('');
@@ -243,9 +245,17 @@ function initCarouselControls() {
   }
 }
 
+function getApiBase() {
+  if (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '5000')) {
+    return 'http://localhost:5000';
+  }
+  return '';
+}
+
 async function loadDynamicProducts() {
+  const apiBase = getApiBase();
   try {
-    const res = await fetch('/api/products');
+    const res = await fetch(`${apiBase}/api/products`);
     if (res.ok) {
       const data = await res.json();
       if (data.success && Array.isArray(data.products) && data.products.length > 0) {
