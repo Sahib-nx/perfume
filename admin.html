@@ -278,8 +278,8 @@
               <input type="number" id="form-rating" class="form-input" min="1" max="5" step="0.1" value="4.9" required>
             </div>
 
-            <!-- Audience Category -->
-            <div class="form-group full-width">
+            <!-- Audience Category & Fragrance Context -->
+            <div class="form-group">
               <label class="form-label" for="form-category">Target Audience Category</label>
               <select id="form-category" class="form-select">
                 <option value="Women">Women</option>
@@ -288,13 +288,88 @@
               </select>
             </div>
 
-            <!-- Description -->
-            <div class="form-group full-width">
-              <label class="form-label" for="form-desc">Product Description & Scent Notes</label>
-              <textarea id="form-desc" class="form-textarea" placeholder="A luminous floral composition of night-blooming jasmine and delicate lilies..."></textarea>
+            <div class="form-group">
+              <label class="form-label" for="form-mood">Mood / Character</label>
+              <input type="text" id="form-mood" class="form-input" placeholder="e.g. Sensual, Opulent, Regal, Fresh">
             </div>
 
-            <!-- Image Selection & Cloudinary Section -->
+            <!-- Fragrance Notes (Full Width) -->
+            <div class="form-group full-width">
+              <label class="form-label" for="form-notes">Fragrance Notes (Top, Heart, Base)</label>
+              <input type="text" id="form-notes" class="form-input" placeholder="e.g. Taif Rose, Night Jasmine, White Lily, Golden Amber, Agarwood">
+            </div>
+
+            <!-- Description with AI Copywriter Toolbar -->
+            <div class="form-group full-width">
+              <label class="form-label" for="form-desc">Product Description & Scent Profile</label>
+              <textarea id="form-desc" class="form-textarea" rows="3" placeholder="A luminous floral composition of night-blooming jasmine and delicate lilies..."></textarea>
+
+              <!-- ✨ AI Description Assistants Toolbar -->
+              <div class="ai-desc-toolbar">
+                <div class="ai-desc-toolbar-title">
+                  <span class="ai-sparkle-icon">✨</span>
+                  <span>AI Copywriter (Analyzes uploaded bottle photo, name & notes):</span>
+                </div>
+                <div class="ai-desc-buttons-group">
+                  <button type="button" class="ai-chip-btn" id="btn-ai-desc-generate" title="Generate 40-70 word luxury description">
+                    ✨ Generate
+                  </button>
+                  <button type="button" class="ai-chip-btn" id="btn-ai-desc-improve" title="Refine current description into high luxury">
+                    ✨ Improve
+                  </button>
+                  <button type="button" class="ai-chip-btn" id="btn-ai-desc-shorten" title="Make concise 30-45 words">
+                    ✨ Shorten
+                  </button>
+                  <button type="button" class="ai-chip-btn" id="btn-ai-desc-luxurious" title="Make ultra-opulent and poetic">
+                    ✨ Make Luxurious
+                  </button>
+                  <button type="button" class="ai-chip-btn" id="btn-ai-desc-seo" title="SEO-optimized description">
+                    ✨ SEO Description
+                  </button>
+                </div>
+              </div>
+
+              <!-- AI Description Loading State -->
+              <div class="ai-loading-indicator sm" id="ai-desc-loading" style="display: none;">
+                <div class="ai-shimmer-spinner sm"></div>
+                <span id="ai-desc-loading-text">✨ Writing your luxury perfume description...</span>
+              </div>
+
+              <!-- AI Description Suggestion Drawer / Preview -->
+              <div class="ai-desc-preview-drawer" id="ai-desc-preview-drawer" style="display: none;">
+                <div class="ai-desc-preview-header">
+                  <span class="ai-preview-tag">✨ AI Generated Suggestion (Preview)</span>
+                  <span class="ai-word-count" id="ai-desc-word-count">52 words</span>
+                </div>
+                <div class="ai-desc-preview-content" id="ai-desc-preview-content">
+                  <!-- Generated text will appear here -->
+                </div>
+                <div class="ai-desc-preview-actions">
+                  <button type="button" class="btn-ai-secondary sm" id="btn-ai-desc-cancel">Dismiss</button>
+                  <button type="button" class="btn-ai-primary sm" id="btn-ai-desc-apply">
+                    ✓ Apply to Description
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product Tags with AI Assistant -->
+            <div class="form-group full-width">
+              <div class="label-with-ai-action">
+                <label class="form-label" for="form-tags">Product Tags</label>
+                <button type="button" class="ai-inline-btn" id="btn-ai-generate-tags">
+                  ✨ Generate Tags
+                </button>
+              </div>
+              <input type="text" id="form-tags" class="form-input" placeholder="e.g. Taif Rose, Floral, Luxury, Women's Fragrance, Seductive, Spring">
+              <!-- AI Tags Loading Indicator -->
+              <div class="ai-loading-indicator xs" id="ai-tags-loading" style="display: none;">
+                <div class="ai-shimmer-spinner xs"></div>
+                <span>✨ Generating product tags...</span>
+              </div>
+            </div>
+
+            <!-- Image Selection & Cloudinary Section with AI Image Enhancer -->
             <div class="form-group full-width">
               <label class="form-label">Perfume Image *</label>
               <div class="image-upload-wrapper">
@@ -327,6 +402,305 @@
                     <button type="button" class="preset-chip" data-src="assets/products/amber_oud.jpg">Oud</button>
                     <button type="button" class="preset-chip" data-src="assets/products/lavender_purple.jpg">Lavender</button>
                     <button type="button" class="preset-chip" data-src="assets/products/night_black.jpg">1001 Nights</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ✨ AI Product Enhancer Box -->
+              <div class="ai-enhancer-container" id="ai-enhancer-container">
+                <div class="ai-enhancer-header">
+                  <div class="ai-header-title">
+                    <span class="ai-sparkle-icon">✨</span>
+                    <div>
+                      <h4 class="ai-title-text">AI Perfume Product Enhancer</h4>
+                      <p class="ai-title-sub">Turn your normal perfume photo into a luxury editorial campaign</p>
+                    </div>
+                  </div>
+                  <span class="ai-badge">Editorial AI</span>
+                </div>
+
+                <div class="ai-enhancer-body">
+                  <!-- Mode Switcher Tabs -->
+                  <div class="ai-mode-tabs" role="tablist">
+                    <button type="button" class="ai-mode-tab active" data-mode="auto" id="tab-mode-auto">
+                      <span class="ai-tab-icon">✨</span>
+                      <span>AI Auto Enhance</span>
+                      <span class="ai-tab-pill">Recommended</span>
+                    </button>
+                    <button type="button" class="ai-mode-tab" data-mode="style" id="tab-mode-style">
+                      <span class="ai-tab-icon">🎨</span>
+                      <span>Choose a Style</span>
+                    </button>
+                    <button type="button" class="ai-mode-tab" data-mode="custom" id="tab-mode-custom">
+                      <span class="ai-tab-icon">⚙️</span>
+                      <span>Customize</span>
+                    </button>
+                  </div>
+
+                  <!-- MODE 1: ✨ AI AUTO ENHANCE (PRIMARY & DEFAULT) -->
+                  <div class="ai-mode-view active" id="view-mode-auto">
+                    <div class="ai-auto-hero-card">
+                      <div class="ai-auto-hero-icon">✨</div>
+                      <div class="ai-auto-hero-text">
+                        <h5>AI Auto Enhance</h5>
+                        <p class="ai-auto-subtitle">"Let AI choose the perfect environment for your perfume."</p>
+                        <p class="ai-auto-desc">AI analyzes your perfume title, fragrance notes, mood, and bottle appearance to craft the ideal luxury editorial setting automatically.</p>
+                      </div>
+                      <button type="button" class="btn-ai-hero-action" id="btn-ai-auto-enhance">
+                        <span>✨ Enhance Automatically</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- MODE 2: CHOOSE A STYLE (12 LUXURY PRESETS) -->
+                  <div class="ai-mode-view" id="view-mode-style" style="display: none;">
+                    <p class="ai-section-hint">Select a signature haute parfumerie atmosphere:</p>
+                    <div class="ai-style-grid">
+                      <label class="ai-style-card active" data-style="luxury-floral">
+                        <input type="radio" name="ai-style-radio" value="luxury-floral" checked>
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🌸</span>
+                          <span class="ai-style-name">Luxury Floral</span>
+                        </div>
+                        <p class="ai-style-desc">Elegant flowers, soft botanical elements, ivory silk and champagne lighting.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="rose-romance">
+                        <input type="radio" name="ai-style-radio" value="rose-romance">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🌹</span>
+                          <span class="ai-style-name">Rose Romance</span>
+                        </div>
+                        <p class="ai-style-desc">Velvet Taif roses, blush marble, soft morning golden mist.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="dark-oud">
+                        <input type="radio" name="ai-style-radio" value="dark-oud">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🪵</span>
+                          <span class="ai-style-name">Dark Oud</span>
+                        </div>
+                        <p class="ai-style-desc">Rich oud wood, amber, deep warm tones, dramatic premium lighting.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="fresh-botanical">
+                        <input type="radio" name="ai-style-radio" value="fresh-botanical">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🌿</span>
+                          <span class="ai-style-name">Fresh Botanical</span>
+                        </div>
+                        <p class="ai-style-desc">Fresh greenery, natural stones, soft daylight and subtle water elements.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="arabian-luxury">
+                        <input type="radio" name="ai-style-radio" value="arabian-luxury">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">👑</span>
+                          <span class="ai-style-name">Arabian Luxury</span>
+                        </div>
+                        <p class="ai-style-desc">Ornate golden brass tray, royal draped gold silk satin, desert dusk glow.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="minimal-luxury">
+                        <input type="radio" name="ai-style-radio" value="minimal-luxury">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🏛️</span>
+                          <span class="ai-style-name">Minimal Luxury</span>
+                        </div>
+                        <p class="ai-style-desc">Clean geometric limestone podium, neutral warm beige studio backdrop, soft shadows.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="royal-gold">
+                        <input type="radio" name="ai-style-radio" value="royal-gold">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">✨</span>
+                          <span class="ai-style-name">Royal Gold</span>
+                        </div>
+                        <p class="ai-style-desc">Gleaming golden accents, champagne crystal reflections, opulent royal ambiance.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="natural-elegance">
+                        <input type="radio" name="ai-style-radio" value="natural-elegance">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🍃</span>
+                          <span class="ai-style-name">Natural Elegance</span>
+                        </div>
+                        <p class="ai-style-desc">Organic natural stone, wild delicate blossoms, airy gentle sunbeams.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="romantic-luxury">
+                        <input type="radio" name="ai-style-radio" value="romantic-luxury">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🕯️</span>
+                          <span class="ai-style-name">Romantic Luxury</span>
+                        </div>
+                        <p class="ai-style-desc">Soft candlelight glow, velvet pastel drapery, delicate flower petals.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="modern-luxury">
+                        <input type="radio" name="ai-style-radio" value="modern-luxury">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">💎</span>
+                          <span class="ai-style-name">Modern Luxury</span>
+                        </div>
+                        <p class="ai-style-desc">Sleek architectural podium, ultra-clean studio lighting, refined minimalism.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="warm-amber">
+                        <input type="radio" name="ai-style-radio" value="warm-amber">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">🔥</span>
+                          <span class="ai-style-name">Warm Amber</span>
+                        </div>
+                        <p class="ai-style-desc">Glowing amber resins, warm spiced woods, rich golden dusk illumination.</p>
+                      </label>
+
+                      <label class="ai-style-card" data-style="fresh-clean">
+                        <input type="radio" name="ai-style-radio" value="fresh-clean">
+                        <div class="ai-style-card-header">
+                          <span class="ai-style-icon">💧</span>
+                          <span class="ai-style-name">Fresh & Clean</span>
+                        </div>
+                        <p class="ai-style-desc">Crystal clear water droplets, pristine white marble, luminous crisp daylight.</p>
+                      </label>
+                    </div>
+
+                    <div class="ai-style-cta-wrap">
+                      <button type="button" class="btn-ai-action" id="btn-ai-style-enhance">
+                        <span>✨ Generate with Selected Style</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- MODE 3: CUSTOMIZE ENHANCEMENT (STRUCTURED CHIPS, NO TEXTBOX) -->
+                  <div class="ai-mode-view" id="view-mode-custom" style="display: none;">
+                    <p class="ai-section-hint">Select elements to guide the AI composition (no prompt typing needed):</p>
+                    
+                    <div class="ai-custom-category">
+                      <span class="ai-custom-cat-title">ENVIRONMENT MATERIALS</span>
+                      <div class="ai-chips-selector" data-category="environment">
+                        <button type="button" class="ai-select-chip" data-val="marble">Marble</button>
+                        <button type="button" class="ai-select-chip" data-val="silk-fabric">Silk Fabric</button>
+                        <button type="button" class="ai-select-chip" data-val="natural-stone">Natural Stone</button>
+                        <button type="button" class="ai-select-chip" data-val="oud-wood">Oud Wood</button>
+                        <button type="button" class="ai-select-chip" data-val="amber">Amber</button>
+                        <button type="button" class="ai-select-chip" data-val="water">Water Droplets</button>
+                        <button type="button" class="ai-select-chip" data-val="greenery">Greenery</button>
+                        <button type="button" class="ai-select-chip" data-val="leaves">Leaves</button>
+                        <button type="button" class="ai-select-chip" data-val="branches">Branches</button>
+                        <button type="button" class="ai-select-chip" data-val="petals">Petals</button>
+                        <button type="button" class="ai-select-chip" data-val="flowers">Flowers</button>
+                        <button type="button" class="ai-select-chip" data-val="wood">Wood</button>
+                        <button type="button" class="ai-select-chip" data-val="dried-botanicals">Dried Botanicals</button>
+                      </div>
+                    </div>
+
+                    <div class="ai-custom-category">
+                      <span class="ai-custom-cat-title">FLOWERS & BOTANICALS</span>
+                      <div class="ai-chips-selector" data-category="flowers">
+                        <button type="button" class="ai-select-chip" data-val="rose">🌹 Rose</button>
+                        <button type="button" class="ai-select-chip" data-val="jasmine">🌸 Jasmine</button>
+                        <button type="button" class="ai-select-chip" data-val="lily">🌺 Lily</button>
+                        <button type="button" class="ai-select-chip" data-val="orchid">🪷 Orchid</button>
+                        <button type="button" class="ai-select-chip" data-val="lavender">💜 Lavender</button>
+                        <button type="button" class="ai-select-chip" data-val="peony">💮 Peony</button>
+                        <button type="button" class="ai-select-chip" data-val="white-flowers">🌼 White Flowers</button>
+                        <button type="button" class="ai-select-chip" data-val="mixed-flowers">💐 Mixed Flowers</button>
+                      </div>
+                    </div>
+
+                    <div class="ai-custom-category">
+                      <span class="ai-custom-cat-title">ATMOSPHERE & MOOD</span>
+                      <div class="ai-chips-selector" data-category="atmosphere">
+                        <button type="button" class="ai-select-chip" data-val="elegant">Elegant</button>
+                        <button type="button" class="ai-select-chip" data-val="romantic">Romantic</button>
+                        <button type="button" class="ai-select-chip" data-val="fresh">Fresh</button>
+                        <button type="button" class="ai-select-chip" data-val="warm">Warm</button>
+                        <button type="button" class="ai-select-chip" data-val="dark">Dark & Rich</button>
+                        <button type="button" class="ai-select-chip" data-val="mysterious">Mysterious</button>
+                        <button type="button" class="ai-select-chip" data-val="bright">Bright</button>
+                        <button type="button" class="ai-select-chip" data-val="minimal">Minimal</button>
+                        <button type="button" class="ai-select-chip" data-val="dramatic">Dramatic</button>
+                        <button type="button" class="ai-select-chip" data-val="regal">Regal</button>
+                        <button type="button" class="ai-select-chip" data-val="natural">Natural</button>
+                      </div>
+                    </div>
+
+                    <div class="ai-custom-category">
+                      <span class="ai-custom-cat-title">LIGHTING</span>
+                      <div class="ai-chips-selector" data-category="lighting">
+                        <button type="button" class="ai-select-chip" data-val="warm-golden">Warm Golden</button>
+                        <button type="button" class="ai-select-chip" data-val="golden-hour">Golden Hour</button>
+                        <button type="button" class="ai-select-chip" data-val="soft-diffused">Soft Diffused</button>
+                        <button type="button" class="ai-select-chip" data-val="natural-daylight">Natural Daylight</button>
+                        <button type="button" class="ai-select-chip" data-val="luxury-studio">Luxury Studio</button>
+                        <button type="button" class="ai-select-chip" data-val="dramatic">Dramatic Chiaroscuro</button>
+                      </div>
+                    </div>
+
+                    <div class="ai-custom-category">
+                      <span class="ai-custom-cat-title">COLOR PALETTE</span>
+                      <div class="ai-chips-selector" data-category="color">
+                        <button type="button" class="ai-select-chip" data-val="ivory">Ivory</button>
+                        <button type="button" class="ai-select-chip" data-val="cream">Cream</button>
+                        <button type="button" class="ai-select-chip" data-val="beige">Beige</button>
+                        <button type="button" class="ai-select-chip" data-val="champagne">Champagne</button>
+                        <button type="button" class="ai-select-chip" data-val="soft-gold">Soft Gold</button>
+                        <button type="button" class="ai-select-chip" data-val="warm-brown">Warm Brown</button>
+                        <button type="button" class="ai-select-chip" data-val="natural-green">Natural Green</button>
+                        <button type="button" class="ai-select-chip" data-val="soft-pink">Soft Pink</button>
+                        <button type="button" class="ai-select-chip" data-val="dark-brown">Dark Brown</button>
+                      </div>
+                    </div>
+
+                    <div class="ai-style-cta-wrap">
+                      <button type="button" class="btn-ai-action" id="btn-ai-custom-enhance">
+                        <span>✨ Generate Custom Enhancement</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- AI Loading State -->
+                  <div class="ai-loading-indicator" id="ai-image-loading" style="display: none;">
+                    <div class="ai-shimmer-spinner"></div>
+                    <span id="ai-image-loading-text">✨ Creating your luxury product image...</span>
+                  </div>
+
+                  <!-- AI Image Preview Comparison Panel -->
+                  <div class="ai-image-comparison-panel" id="ai-image-comparison-panel" style="display: none;">
+                    <div class="ai-comparison-grid">
+                      <div class="ai-comp-card">
+                        <span class="ai-comp-badge">Original Photograph</span>
+                        <div class="ai-comp-img-wrap">
+                          <img id="ai-orig-preview" src="" alt="Original Photo">
+                        </div>
+                      </div>
+                      <div class="ai-comp-card ai-enhanced-card">
+                        <div class="ai-comp-header">
+                          <span class="ai-comp-badge active">✨ AI Enhanced (1:1 Web Optimized)</span>
+                          <span class="ai-active-style-tag" id="ai-active-style-tag">AI Auto</span>
+                        </div>
+                        <div class="ai-comp-img-wrap">
+                          <img id="ai-enhanced-preview" src="" alt="AI Enhanced Result">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="ai-image-actions-row">
+                      <button type="button" class="btn-ai-secondary" id="btn-ai-regenerate">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M23 4v6h-6"></path>
+                          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        <span>Regenerate</span>
+                      </button>
+                      <button type="button" class="btn-ai-primary" id="btn-ai-accept-image">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Use This Image (Upload to Cloudinary)</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -391,7 +765,7 @@
 
         <div class="modal-footer">
           <button type="button" class="modal-btn-cancel" id="btn-cancel-modal">Cancel</button>
-          <button type="submit" class="modal-btn-save" id="btn-save-product">
+          <button type="button" class="modal-btn-save" id="btn-save-product">
             <span id="save-btn-text">Save Perfume</span>
           </button>
         </div>

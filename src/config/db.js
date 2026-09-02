@@ -87,7 +87,10 @@ async function getAllProducts() {
         price: doc.price,
         rating: doc.rating,
         category: doc.category,
-        description: doc.description,
+        description: doc.description || '',
+        notes: doc.notes || '',
+        mood: doc.mood || '',
+        tags: Array.isArray(doc.tags) ? doc.tags : [],
         imageUrl: doc.imageUrl,
         placement,
         isFeatured,
@@ -103,6 +106,9 @@ async function getAllProducts() {
     const placement = p.placement || (isFeatured ? 'featured' : (filterCategories[0] || 'best-sellers'));
     return {
       ...p,
+      notes: p.notes || '',
+      mood: p.mood || '',
+      tags: Array.isArray(p.tags) ? p.tags : [],
       placement,
       isFeatured,
       filterCategories
@@ -118,6 +124,9 @@ async function getProductById(id) {
     const filterCategories = Array.isArray(doc.filterCategories) ? doc.filterCategories : [doc.filterCategories].filter(Boolean);
     return {
       ...doc,
+      notes: doc.notes || '',
+      mood: doc.mood || '',
+      tags: Array.isArray(doc.tags) ? doc.tags : [],
       placement: isFeatured ? 'featured' : (filterCategories[0] || 'best-sellers'),
       isFeatured,
       filterCategories
@@ -148,6 +157,9 @@ async function createProduct(productData) {
     rating: Number(productData.rating) || 5.0,
     category: productData.category || 'Unisex',
     description: productData.description ? productData.description.trim() : '',
+    notes: productData.notes ? productData.notes.trim() : '',
+    mood: productData.mood ? productData.mood.trim() : '',
+    tags: Array.isArray(productData.tags) ? productData.tags : (typeof productData.tags === 'string' ? productData.tags.split(',').map(t => t.trim()).filter(Boolean) : []),
     imageUrl: productData.imageUrl || 'assets/products/amber_orient.jpg',
     placement,
     isFeatured,
