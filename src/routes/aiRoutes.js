@@ -11,7 +11,5 @@ const { upload } = require('../middleware/upload');
 
 router.post('/generate-description', verifyAuth, aiController.generateDescription);
 router.post('/generate-tags', verifyAuth, aiController.generateTags);
-router.post('/enhance-image', verifyAuth, upload.single('image'), aiController.enhanceImage);
-router.post('/upload-enhanced', verifyAuth, aiController.uploadEnhancedToCloudinary);
 
 module.exports = router;

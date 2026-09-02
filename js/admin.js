@@ -57,29 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const formPrice = document.getElementById('form-price');
   const formRating = document.getElementById('form-rating');
   const formCategory = document.getElementById('form-category');
+  const formFamily = document.getElementById('form-family');
   const formMood = document.getElementById('form-mood');
+  const formOccasion = document.getElementById('form-occasion');
   const formNotes = document.getElementById('form-notes');
   const formDesc = document.getElementById('form-desc');
   const formTags = document.getElementById('form-tags');
   const formImageUrl = document.getElementById('form-image-url');
   const formImageFile = document.getElementById('form-image-file');
   const formImagePreview = document.getElementById('form-image-preview');
-  const presetChips = document.querySelectorAll('.preset-chip');
-
-  // AI DOM Elements - Image Enhancer
-  const aiImageLoading = document.getElementById('ai-image-loading');
-  const aiImageLoadingText = document.getElementById('ai-image-loading-text');
-  const aiImageComparisonPanel = document.getElementById('ai-image-comparison-panel');
-  const aiOrigPreview = document.getElementById('ai-orig-preview');
-  const aiEnhancedPreview = document.getElementById('ai-enhanced-preview');
-  const btnAiRegenerate = document.getElementById('btn-ai-regenerate');
-  const btnAiAcceptImage = document.getElementById('btn-ai-accept-image');
-  let currentEnhancedUrl = null;
+  const imagePreviewPlaceholder = document.getElementById('image-preview-placeholder');
 
   // AI DOM Elements - Description Assistants
   const btnAiDescGenerate = document.getElementById('btn-ai-desc-generate');
   const btnAiDescImprove = document.getElementById('btn-ai-desc-improve');
-  const btnAiDescShorten = document.getElementById('btn-ai-desc-shorten');
   const btnAiDescLuxurious = document.getElementById('btn-ai-desc-luxurious');
   const btnAiDescSeo = document.getElementById('btn-ai-desc-seo');
   const aiDescLoading = document.getElementById('ai-desc-loading');
@@ -91,9 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnAiDescCancel = document.getElementById('btn-ai-desc-cancel');
   let pendingDescText = '';
 
-  // AI DOM Elements - Product Tags
+  // AI DOM Elements - Product Tags & Removable Chips
   const btnAiGenerateTags = document.getElementById('btn-ai-generate-tags');
   const aiTagsLoading = document.getElementById('ai-tags-loading');
+  const aiTagsChipsContainer = document.getElementById('ai-tags-chips-container');
 
   // Placement Radios & Subselectors
   const radioPlacementFeatured = document.getElementById('radio-placement-featured');
@@ -401,8 +393,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  radioPlacementFeatured.addEventListener('change', updatePlacementUI);
-  radioPlacementCollection.addEventListener('change', updatePlacementUI);
+  // --- Removable Tag Chips Renderer ---
+  function renderTagChips(tagsInput) {
+    if (!aiTagsChipsContainer) return;
+    let tags = [];
+    if (Array.isArray(tagsInput)) {
+      tags = tagsInput.map(t => String(t).trim()).filter(Boolean);
+    } else if (typeof tagsInput === 'string') {
+      tags = tagsInput.split(',').map(t => t.trim()).filter(Boolean);
+    }
+
+    if (tags.length === 0) {
+      aiTagsChipsContainer.innerHTML = '';
+      aiTagsChipsContainer.style.display = 'none';
+      return;
+    }
+
+    aiTagsChipsContainer.innerHTML = '';
+    aiTagsChipsContainer.style.display = 'flex';
+
+    tags.forEach((tag, idx) => {
+      const chip = document.createElement('span');
+      chip.className = 'ai-tag-chip';
+      chip.textContent = tag + ' ';
+
+      const btnRemove = document.createElement('button');
+      btnRemove.type = 'button';
+      btnRemove.className = 'ai-tag-chip-remove';
+      btnRemove.innerHTML = '&times;';
+      btnRemove.title = `Remove "${tag}"`;
+      btnRemove.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const updatedTags = tags.filter((_, i) => i !== idx);
+        formTags.value = updatedTags.join(', ');
+        renderTagChips(updatedTags);
+      });
+
+      chip.appendChild(btnRemove);
+      aiTagsChipsContainer.appendChild(chip);
+    });
+  }
+
+  if (formTags) {
+    formTags.addEventListener('input', () => {
+      renderTagChips(formTags.value);
+    });
+  }
+
+  // Helper: Live Image Preview Handler
+  function updateImagePreview(src) {
+    if (!formImagePreview) return;
+    if (src && src.trim()) {
+      formImagePreview.src = src.trim();
+      formImagePreview.style.display = 'block';
+      if (imagePreviewPlaceholder) imagePreviewPlaceholder.style.display = 'none';
+    } else {
+      formImagePreview.src = '';
+      formImagePreview.style.display = 'none';
+      if (imagePreviewPlaceholder) imagePreviewPlaceholder.style.display = 'block';
+    }
+  }
 
   function resetForm() {
     formProductId.value = '';
@@ -410,12 +461,17 @@ document.addEventListener('DOMContentLoaded', () => {
     formPrice.value = '';
     formRating.value = '4.9';
     formCategory.value = 'Women';
+    if (formFamily) formFamily.value = '';
     if (formMood) formMood.value = '';
+    if (formOccasion) formOccasion.value = '';
     if (formNotes) formNotes.value = '';
     formDesc.value = '';
     if (formTags) formTags.value = '';
-    formImageUrl.value = 'assets/products/jasmine_white.jpg';
-    formImagePreview.src = 'assets/products/jasmine_white.jpg';
+    
+    // Clean empty image state (no prefilled default image)
+    if (formImageUrl) formImageUrl.value = '';
+    updateImagePreview('');
+    if (formImageFile) formImageFile.value = '';
     
     // Default placement: Top Featured
     radioPlacementFeatured.checked = true;
@@ -423,16 +479,12 @@ document.addEventListener('DOMContentLoaded', () => {
     filterTagBestSellers.checked = true;
     updatePlacementUI();
 
-    if (formImageFile) formImageFile.value = '';
-
     // Reset AI states & panels
-    currentEnhancedUrl = null;
     pendingDescText = '';
-    if (aiImageComparisonPanel) aiImageComparisonPanel.style.display = 'none';
-    if (aiImageLoading) aiImageLoading.style.display = 'none';
     if (aiDescPreviewDrawer) aiDescPreviewDrawer.style.display = 'none';
     if (aiDescLoading) aiDescLoading.style.display = 'none';
     if (aiTagsLoading) aiTagsLoading.style.display = 'none';
+    renderTagChips([]);
   }
 
   btnOpenCreateModal.addEventListener('click', () => {
@@ -458,12 +510,18 @@ document.addEventListener('DOMContentLoaded', () => {
     formPrice.value = product.price;
     formRating.value = product.rating || '4.9';
     formCategory.value = product.category || 'Women';
+    if (formFamily) formFamily.value = product.fragranceFamily || product.family || '';
     if (formMood) formMood.value = product.mood || '';
+    if (formOccasion) formOccasion.value = product.occasion || '';
     if (formNotes) formNotes.value = product.notes || '';
     formDesc.value = product.description || '';
-    if (formTags) formTags.value = Array.isArray(product.tags) ? product.tags.join(', ') : (product.tags || '');
-    formImageUrl.value = product.imageUrl || '';
-    formImagePreview.src = product.imageUrl || 'assets/products/jasmine_white.jpg';
+    if (formTags) {
+      const tagList = Array.isArray(product.tags) ? product.tags : (product.tags ? product.tags.split(',') : []);
+      formTags.value = tagList.map(t => t.trim()).filter(Boolean).join(', ');
+      renderTagChips(tagList);
+    }
+    if (formImageUrl) formImageUrl.value = product.imageUrl || '';
+    updateImagePreview(product.imageUrl || '');
 
     // Set Placement
     const isFeatured = product.isFeatured || product.placement === 'featured';
@@ -486,11 +544,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function closeModal() {
-    // Prevent closing while enhancement is in progress
-    if (isEnhancementInProgress) {
-      showToast('⏳ Please wait for AI image enhancement to complete before closing.', 'info');
-      return;
-    }
     productModal.classList.add('hidden');
   }
 
@@ -498,58 +551,51 @@ document.addEventListener('DOMContentLoaded', () => {
   btnCancelModal.addEventListener('click', closeModal);
 
   // Live URL update preview
-  formImageUrl.addEventListener('input', () => {
-    formImagePreview.src = formImageUrl.value || 'assets/products/jasmine_white.jpg';
-  });
-
-  // Preset Chips
-  presetChips.forEach(chip => {
-    chip.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const src = chip.dataset.src;
-      formImageUrl.value = src;
-      formImagePreview.src = src;
+  if (formImageUrl) {
+    formImageUrl.addEventListener('input', () => {
+      updateImagePreview(formImageUrl.value.trim());
     });
-  });
+  }
 
   // File Upload (Cloudinary or local storage upload)
-  formImageFile.addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  if (formImageFile) {
+    formImageFile.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (re) => {
-      formImagePreview.src = re.target.result;
-    };
-    reader.readAsDataURL(file);
+      const reader = new FileReader();
+      reader.onload = (re) => {
+        updateImagePreview(re.target.result);
+      };
+      reader.readAsDataURL(file);
 
-    const formData = new FormData();
-    formData.append('image', file);
+      const formData = new FormData();
+      formData.append('image', file);
 
-    const token = getAuthToken();
-    showToast('Uploading image to Cloudinary...', 'info');
+      const token = getAuthToken();
+      showToast('Uploading image to Cloudinary...', 'info');
 
-    try {
-      const res = await fetch(`${API_BASE}/api/upload`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: formData
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        formImageUrl.value = data.imageUrl;
-        formImagePreview.src = data.imageUrl;
-        showToast(data.message || 'Image uploaded successfully!', 'success');
-      } else {
-        showToast(data.message || 'Upload failed, please use image URL.', 'error');
+      try {
+        const res = await fetch(`${API_BASE}/api/upload`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}` },
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          formImageUrl.value = data.imageUrl;
+          updateImagePreview(data.imageUrl);
+          showToast(data.message || 'Image uploaded successfully!', 'success');
+        } else {
+          showToast(data.message || 'Upload failed, please use image URL.', 'error');
+        }
+      } catch (err) {
+        showToast('Error uploading image file', 'error');
       }
-    } catch (err) {
-      showToast('Error uploading image file', 'error');
-    }
-  });
+    });
+  }
 
-  // Prevent implicit or accidental form submissions from buttons or keypresses
+  // Prevent implicit form submissions
   productForm.addEventListener('submit', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -562,18 +608,17 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
     }
 
-    if (isEnhancementInProgress) {
-      showToast('⏳ Please wait for AI image enhancement to complete before saving.', 'info');
-      return;
-    }
-
     const id = formProductId.value.trim();
     const title = formTitle.value.trim();
     const price = Number(formPrice.value);
     const rating = Number(formRating.value);
     const category = formCategory.value;
+    const fragranceFamily = formFamily ? formFamily.value.trim() : '';
+    const mood = formMood ? formMood.value.trim() : '';
+    const occasion = formOccasion ? formOccasion.value.trim() : '';
+    const notes = formNotes ? formNotes.value.trim() : '';
     const description = formDesc.value.trim();
-    const imageUrl = formImageUrl.value.trim() || 'assets/products/jasmine_white.jpg';
+    const imageUrl = formImageUrl ? formImageUrl.value.trim() : '';
 
     if (!title) {
       showToast('Please enter a perfume title / name.', 'info');
@@ -587,6 +632,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    if (!imageUrl) {
+      showToast('Please upload an image file or provide an image URL.', 'info');
+      if (formImageUrl) formImageUrl.focus();
+      return;
+    }
+
     // Placement determination
     let placement = 'featured';
     if (radioPlacementCollection.checked) {
@@ -594,8 +645,6 @@ document.addEventListener('DOMContentLoaded', () => {
       placement = selectedFilter ? selectedFilter.value : 'best-sellers';
     }
 
-    const notes = formNotes ? formNotes.value.trim() : '';
-    const mood = formMood ? formMood.value.trim() : '';
     const tags = formTags ? formTags.value.split(',').map(t => t.trim()).filter(Boolean) : [];
 
     const payload = {
@@ -603,7 +652,9 @@ document.addEventListener('DOMContentLoaded', () => {
       price,
       rating: isNaN(rating) ? 4.9 : rating,
       category,
+      fragranceFamily,
       mood,
+      occasion,
       notes,
       description,
       tags,
@@ -652,298 +703,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // 6. AI PERFUME IMAGE ENHANCER, COPYWRITER & TAGS INTEGRATION
+  // 6. AI PERFUME CONTENT ASSISTANT (Structured Product Data Driven)
   // ==========================================================================
 
-  // --- AI Image Enhancer Mode & Controls ---
-  let currentEnhanceMode = 'auto';
-  let isEnhancementInProgress = false;  // Flag to prevent modal closing during enhancement
-
-  // Mode Tabs Switching
-  const aiModeTabs = document.querySelectorAll('.ai-mode-tab');
-  const aiModeViews = {
-    'auto': document.getElementById('view-mode-auto'),
-    'style': document.getElementById('view-mode-style'),
-    'custom': document.getElementById('view-mode-custom')
-  };
-
-  aiModeTabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      aiModeTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const mode = tab.getAttribute('data-mode');
-      currentEnhanceMode = mode;
-
-      Object.keys(aiModeViews).forEach(k => {
-        if (aiModeViews[k]) {
-          aiModeViews[k].style.display = (k === mode) ? 'block' : 'none';
-        }
-      });
-    });
-  });
-
-  // Style Cards Radio Selection
-  const aiStyleCards = document.querySelectorAll('.ai-style-card');
-  aiStyleCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      aiStyleCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      const radio = card.querySelector('input[type="radio"]');
-      if (radio) radio.checked = true;
-    });
-  });
-
-  // Custom Chips Toggle Selection
-  const aiSelectChips = document.querySelectorAll('.ai-select-chip');
-  aiSelectChips.forEach(chip => {
-    chip.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      chip.classList.toggle('selected');
-    });
-  });
-
-  // Helper: Collect selected custom chips
-  function getCustomSelections() {
-    const selections = {
-      environment: [],
-      flowers: [],
-      atmosphere: [],
-      lighting: [],
-      color: []
+  // Build clean internal structured context object from current form values
+  function buildProductContext() {
+    return {
+      title: formTitle ? formTitle.value.trim() : '',
+      name: formTitle ? formTitle.value.trim() : '',
+      brand: 'Diwan Al Attour',
+      gender: formCategory ? formCategory.value : 'Unisex',
+      category: formCategory ? formCategory.value : 'Unisex',
+      perfumeType: 'Eau de Parfum',
+      fragranceFamily: formFamily ? formFamily.value.trim() : '',
+      notes: formNotes ? formNotes.value.trim() : '',
+      mood: formMood ? formMood.value.trim() : '',
+      occasion: formOccasion ? formOccasion.value.trim() : '',
+      description: formDesc ? formDesc.value.trim() : ''
     };
-
-    document.querySelectorAll('.ai-chips-selector').forEach(selector => {
-      const cat = selector.getAttribute('data-category');
-      if (cat && selections[cat]) {
-        selector.querySelectorAll('.ai-select-chip.selected').forEach(c => {
-          selections[cat].push(c.getAttribute('data-val'));
-        });
-      }
-    });
-
-    return selections;
-  }
-
-  // --- Unified AI Image Enhancer Handler ---
-  async function handleEnhanceImage(forcedMode) {
-    const mode = forcedMode || currentEnhanceMode || 'auto';
-    currentEnhanceMode = mode;
-
-    let rawImage = formImageUrl.value.trim();
-    if (!rawImage && (!formImageFile || !formImageFile.files[0])) {
-      showToast('Please upload or select an original perfume image first.', 'info');
-      return;
-    }
-
-    // Strip query parameters from rawImage before sending
-    rawImage = rawImage.split('?')[0].trim();
-
-    // Prevent modal from closing during enhancement
-    isEnhancementInProgress = true;
-    if (btnCloseModal) btnCloseModal.disabled = true;
-    if (btnCancelModal) btnCancelModal.disabled = true;
-
-    const token = getAuthToken();
-    const title = formTitle.value.trim();
-    const category = formCategory.value;
-    const notes = formNotes ? formNotes.value.trim() : '';
-    const mood = formMood ? formMood.value.trim() : '';
-    const description = formDesc.value.trim();
-
-    // Determine Style (if mode === 'style')
-    let selectedStyle = 'luxury-floral';
-    const checkedRadio = document.querySelector('input[name="ai-style-radio"]:checked');
-    if (checkedRadio) selectedStyle = checkedRadio.value;
-
-    // Collect Custom Selections (if mode === 'custom')
-    const customSelections = (mode === 'custom') ? getCustomSelections() : {};
-
-    const actionButtons = [
-      document.getElementById('btn-ai-auto-enhance'),
-      document.getElementById('btn-ai-style-enhance'),
-      document.getElementById('btn-ai-custom-enhance'),
-      btnAiRegenerate
-    ];
-
-    try {
-      // Set Loading UI
-      actionButtons.forEach(btn => { if (btn) btn.disabled = true; });
-      if (aiImageLoadingText) {
-        if (mode === 'auto') aiImageLoadingText.textContent = '✨ AI is analyzing your perfume and crafting the environment...';
-        else if (mode === 'style') aiImageLoadingText.textContent = `✨ Generating ${selectedStyle.replace('-', ' ')} luxury environment...`;
-        else aiImageLoadingText.textContent = '✨ Composing your custom luxury environment...';
-      }
-      if (aiImageLoading) aiImageLoading.style.display = 'flex';
-      if (aiImageComparisonPanel) aiImageComparisonPanel.style.display = 'none';
-
-      let res;
-      if (formImageFile && formImageFile.files[0]) {
-        const formData = new FormData();
-        formData.append('image', formImageFile.files[0]);
-        formData.append('mode', mode);
-        formData.append('style', selectedStyle);
-        formData.append('customSelections', JSON.stringify(customSelections));
-        formData.append('title', title);
-        formData.append('category', category);
-        formData.append('notes', notes);
-        formData.append('mood', mood);
-        formData.append('description', description);
-
-        res = await fetch(`${API_BASE}/api/ai/enhance-image`, {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${token}` },
-          body: formData
-        });
-      } else {
-        res = await fetch(`${API_BASE}/api/ai/enhance-image`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            imageUrl: rawImage,
-            mode,
-            style: selectedStyle,
-            customSelections,
-            title,
-            category,
-            notes,
-            mood,
-            description
-          })
-        });
-      }
-
-      const data = await res.json();
-      if (res.ok && data.success) {
-        currentEnhancedUrl = data.enhancedUrl;
-        const cacheBuster = '?t=' + Date.now();
-        const origSrc = (data.originalUrl || rawImage);
-
-        if (aiOrigPreview) {
-          aiOrigPreview.src = (origSrc.startsWith('http') || origSrc.startsWith('data:')) ? origSrc : origSrc + cacheBuster;
-        }
-        if (aiEnhancedPreview) {
-          aiEnhancedPreview.src = data.enhancedUrl;
-        }
-        
-        const activeTag = document.getElementById('ai-active-style-tag');
-        if (activeTag) activeTag.textContent = data.style || 'AI Enhanced';
-
-        if (aiImageComparisonPanel) {
-          aiImageComparisonPanel.style.display = 'block';
-          // Smooth scroll comparison panel into view so user clearly sees the generated image
-          setTimeout(() => {
-            aiImageComparisonPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 100);
-        }
-
-        showToast(`✨ ${data.style} environment preview ready! Check the comparison panel below.`, 'success');
-      } else {
-        showToast(data.message || 'AI image enhancement failed. Please try again.', 'error');
-      }
-    } catch (err) {
-      console.error('AI Enhance Error:', err);
-      showToast('Network error during AI image enhancement.', 'error');
-    } finally {
-      actionButtons.forEach(btn => { if (btn) btn.disabled = false; });
-      if (aiImageLoading) aiImageLoading.style.display = 'none';
-      // Allow modal to close again after enhancement completes
-      isEnhancementInProgress = false;
-      if (btnCloseModal) btnCloseModal.disabled = false;
-      if (btnCancelModal) btnCancelModal.disabled = false;
-    }
-  }
-
-  // Trigger buttons with explicit event prevention
-  const btnAiAutoEnhance = document.getElementById('btn-ai-auto-enhance');
-  if (btnAiAutoEnhance) btnAiAutoEnhance.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleEnhanceImage('auto');
-  });
-
-  const btnAiStyleEnhance = document.getElementById('btn-ai-style-enhance');
-  if (btnAiStyleEnhance) btnAiStyleEnhance.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleEnhanceImage('style');
-  });
-
-  const btnAiCustomEnhance = document.getElementById('btn-ai-custom-enhance');
-  if (btnAiCustomEnhance) btnAiCustomEnhance.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleEnhanceImage('custom');
-  });
-
-  if (btnAiRegenerate) {
-    btnAiRegenerate.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      handleEnhanceImage(currentEnhanceMode);
-    });
-  }
-
-  // Accept Enhanced Image & Commit to Cloudinary
-  if (btnAiAcceptImage) {
-    btnAiAcceptImage.addEventListener('click', async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!currentEnhancedUrl) {
-        showToast('Please generate an AI enhancement preview first.', 'info');
-        return;
-      }
-
-      const token = getAuthToken();
-      btnAiAcceptImage.disabled = true;
-      showToast('Finalizing accepted luxury image in Cloudinary...', 'info');
-
-      try {
-        const res = await fetch(`${API_BASE}/api/ai/upload-enhanced`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            enhancedUrl: currentEnhancedUrl,
-            originalUrl: formImageUrl.value
-          })
-        });
-
-        const data = await res.json();
-        if (res.ok && data.success) {
-          formImageUrl.value = data.imageUrl;
-          formImagePreview.src = data.imageUrl;
-          showToast('✓ AI enhanced image selected! Click "Save" below to commit changes.', 'success');
-        } else {
-          showToast(data.message || 'Failed to finalize Cloudinary upload.', 'error');
-        }
-      } catch (err) {
-        showToast('Error uploading accepted image to Cloudinary.', 'error');
-      } finally {
-        btnAiAcceptImage.disabled = false;
-      }
-    });
   }
 
   // --- AI Description Assistants Handlers ---
   async function handleGenerateDescription(action = 'generate') {
-    const title = formTitle.value.trim();
-    const category = formCategory.value;
-    const notes = formNotes ? formNotes.value.trim() : '';
-    const mood = formMood ? formMood.value.trim() : '';
-    const existingDesc = formDesc.value.trim();
+    const context = buildProductContext();
 
-    if (!title && !notes && !existingDesc) {
-      showToast('Please enter a Perfume Name or Fragrance Notes first.', 'info');
+    if (action === 'improve' && !context.description) {
+      showToast('Please add a description first, or use Generate Description.', 'info');
+      if (formDesc) formDesc.focus();
+      return;
+    }
+
+    if (!context.title && !context.notes && !context.fragranceFamily && !context.description) {
+      showToast('Add a few more product details such as perfume name, fragrance family, or notes to generate an accurate description.', 'info');
       if (formTitle) formTitle.focus();
       return;
     }
@@ -952,35 +743,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionLabels = {
       'generate': '✨ Writing luxury perfume description...',
       'improve': '✨ Refining and elevating description...',
-      'shorten': '✨ Crafting concise statement...',
-      'luxurious': '✨ Adding opulent vocabulary...',
-      'seo': '✨ Generating SEO-friendly description...'
+      'luxurious': '✨ Polishing in royal luxury tone...',
+      'seo': '✨ Crafting SEO-optimized description...'
     };
 
     if (aiDescLoadingText) aiDescLoadingText.textContent = actionLabels[action] || '✨ Writing description...';
     if (aiDescLoading) aiDescLoading.style.display = 'flex';
     if (aiDescPreviewDrawer) aiDescPreviewDrawer.style.display = 'none';
 
-    // Disable action buttons during generation
-    const actionButtons = [btnAiDescGenerate, btnAiDescImprove, btnAiDescShorten, btnAiDescLuxurious, btnAiDescSeo];
+    const actionButtons = [btnAiDescGenerate, btnAiDescImprove, btnAiDescLuxurious, btnAiDescSeo];
     actionButtons.forEach(btn => { if (btn) btn.disabled = true; });
 
     try {
+      const payload = {
+        ...context,
+        description: (action === 'generate') ? '' : context.description,
+        action
+      };
+
       const res = await fetch(`${API_BASE}/api/ai/generate-description`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-          title,
-          category,
-          notes,
-          mood,
-          description: existingDesc,
-          imageUrl: formImageUrl ? formImageUrl.value.trim() : '',
-          action
-        })
+        body: JSON.stringify(payload)
       });
 
       const data = await res.json();
@@ -994,11 +781,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showToast('✨ AI description ready! Review and apply below.', 'success');
       } else {
-        showToast(data.message || 'AI description generation failed. Please try again.', 'error');
+        showToast(data.message || 'AI generation failed. Please try again.', 'error');
       }
     } catch (err) {
       console.error('AI Desc Error:', err);
-      showToast('Network error generating AI description.', 'error');
+      showToast('AI generation failed. Please try again.', 'error');
     } finally {
       if (aiDescLoading) aiDescLoading.style.display = 'none';
       actionButtons.forEach(btn => { if (btn) btn.disabled = false; });
@@ -1007,11 +794,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnAiDescGenerate) btnAiDescGenerate.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); handleGenerateDescription('generate'); });
   if (btnAiDescImprove) btnAiDescImprove.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); handleGenerateDescription('improve'); });
-  if (btnAiDescShorten) btnAiDescShorten.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); handleGenerateDescription('shorten'); });
   if (btnAiDescLuxurious) btnAiDescLuxurious.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); handleGenerateDescription('luxurious'); });
   if (btnAiDescSeo) btnAiDescSeo.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); handleGenerateDescription('seo'); });
 
-  // Apply AI Description
+  // Apply AI Description (Updates form field for review; does NOT automatically save to DB)
   if (btnAiDescApply) {
     btnAiDescApply.addEventListener('click', (e) => {
       e.preventDefault();
@@ -1019,7 +805,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (pendingDescText) {
         formDesc.value = pendingDescText;
         if (aiDescPreviewDrawer) aiDescPreviewDrawer.style.display = 'none';
-        showToast('✓ Description updated with AI suggestion!', 'success');
+        showToast('✓ Description updated! Remember to click "Save Changes" to save.', 'success');
       }
     });
   }
@@ -1038,14 +824,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnAiGenerateTags.addEventListener('click', async (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const title = formTitle.value.trim();
-      const category = formCategory.value;
-      const notes = formNotes ? formNotes.value.trim() : '';
-      const mood = formMood ? formMood.value.trim() : '';
-      const description = formDesc.value.trim();
+      const context = buildProductContext();
 
-      if (!title && !notes && !description) {
-        showToast('Please provide a Perfume Name or Notes to generate tags.', 'info');
+      if (!context.title && !context.notes && !context.fragranceFamily && !context.description) {
+        showToast('Please provide at least a Perfume Name, Fragrance Family, or Notes to generate tags.', 'info');
+        if (formTitle) formTitle.focus();
         return;
       }
 
@@ -1060,24 +843,19 @@ document.addEventListener('DOMContentLoaded', () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({
-            title,
-            category,
-            notes,
-            mood,
-            description
-          })
+          body: JSON.stringify(context)
         });
 
         const data = await res.json();
         if (res.ok && data.success && Array.isArray(data.tags)) {
           formTags.value = data.tags.join(', ');
-          showToast(`✨ Generated ${data.tags.length} product tags!`, 'success');
+          renderTagChips(data.tags);
+          showToast(`✨ Generated ${data.tags.length} product tags! You can remove any unwanted tags before saving.`, 'success');
         } else {
-          showToast(data.message || 'Failed to generate product tags.', 'error');
+          showToast(data.message || 'AI generation failed. Please try again.', 'error');
         }
       } catch (err) {
-        showToast('Network error generating product tags.', 'error');
+        showToast('AI generation failed. Please try again.', 'error');
       } finally {
         btnAiGenerateTags.disabled = false;
         if (aiTagsLoading) aiTagsLoading.style.display = 'none';
